@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Archives: 2018 | IMCSI</title>
+<title>Lavaral使用（5） | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -121,81 +121,149 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-    	<h1 class="info">2018年 月</h1>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（5）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（5）/"> Lavaral使用（5） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（4）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（4）/"> Lavaral使用（4） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（3）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（3）/"> Lavaral使用（3） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（2）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（2）/"> Lavaral使用（2） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（1）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（1）/"> Lavaral使用（1） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Docker使用（Windows系统）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Docker使用（Windows系统）/"> Docker使用（Windows系统） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Thinkphp-jquery实现多图异步上传/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Thinkphp-jquery实现多图异步上传/"> Thinkphp+jquery实现多图异步上传 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Mysql相关小技巧总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Mysql相关小技巧总结在这里/"> Mysql相关小技巧总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/一些小问题将全部总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/一些小问题将全部总结在这里/"> 一些小问题将全部总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/PHP无极分类递归方法实现/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/PHP无极分类递归方法实现/"> PHP无极分类递归方法实现 </a>
-            </h3>  
-          </li>
-        
-    </ul>
-  </div>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Lavaral使用（5）">
+            
+	            Lavaral使用（5）
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/PHP">
+            PHP
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a href="/tags/laravel cache">
+               laravel cache
+            </a>
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/03/23</span>
+    </span>
 </div>
 
-    <nav class="pagination" role="navigation">
-        <div id="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class='fa fa-angle-right'></i></a>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>1,Cache的使用<br>Laravel目前支持流行的缓存后端包括Memcached和Redis等，下面说的是数据库缓存：</p>
+<p>使用database缓存驱动时，你需要设置一张表包含缓存缓存项。下面是该表的Schema声明：</p>
+<pre><code>Schema::create(&apos;cache&apos;, function (Blueprint $table) {
+            $table-&gt;string(&apos;key&apos;)-&gt;unique();
+            $table-&gt;text(&apos;value&apos;);
+            $table-&gt;integer(&apos;expiration&apos;);
+        });
+</code></pre><p>首先创建表迁移：</p>
+<pre><code>php artisan make:migration create_cache_table
+</code></pre><p>再将表迁移内容替换进去，就是第一段替换</p>
+<p>执行表迁移：</p>
+<pre><code>PS E:\wamp\www\blog&gt; php artisan migrate
+Migrating: 2018_03_22_160436_create_cache_table
+Migrated:  2018_03_22_160436_create_cache_table
+</code></pre><p>那么就可以使用数据库缓存了</p>
+<p>在需要使用的控制器里使用：</p>
+<pre><code>use Cache；
+</code></pre><p>比如要将文章的详情页存入到数据库缓存，并且在没有该详情页缓存的时候添加进去：</p>
+<pre><code>    public function show($id) {
+        $result[&apos;result&apos;] = Cache::remember(&apos;news_&apos; . $id, 10060, function () use ($id) {//news_$id用于区分不同的文章详情，10060表示缓存时间，单位分，
+后面是缓存内容，使用闭包函数use连接文章id调用模型来获取数据
+
+            return Index::where(&apos;id&apos;, $id)-&gt;first();
+        });
+
+        $result[&apos;category_id&apos;] = $result[&apos;result&apos;][&apos;category_id&apos;];
+
+        return view(&apos;home.index.show&apos;, $result);
+    }
+</code></pre><p>Cache的remember方法第一个参数代表的是缓存的key，第二个参数代表缓存的时间，第三个参数表示的是在没有该key的情况下设置的默认值，该参数支持闭包函数。</p>
+<p>你也可使用remember和forever方法：</p>
+<pre><code>$value = Cache::rememberForever(&apos;news_&apos; . $id,function () use ($id) { return Index::where(&apos;id&apos;, $id)-&gt;first();});
+</code></pre><p>来永久缓存数据。</p>
+<p>扩展：比如一些导航栏是每个页面都要获取，我们也可以将其加入到缓存中：</p>
+<p>在之前的文章里，公用的数据我们都放在app/Providers/目录下的服务提供者文件里统一加载数据。</p>
+<p>首先在服务提供者的文件里：</p>
+<pre><code>public function boot() {
+    //基于闭包的composer
+    view()-&gt;composer(&apos;layouts.home&apos;, function ($view) {
+        $config = DB::table(&apos;config&apos;)//获取网站的全局配置参数，如客服电话，公司地址等。。
+            -&gt;where(&apos;id&apos;, 1)
+            -&gt;first();
+        $banner = DB::table(&apos;image&apos;)
+            -&gt;where(&apos;is_see&apos;, 1)
+            -&gt;get();
+        $view-&gt;with(&apos;config&apos;, $config)-&gt;with(&apos;banner&apos;, $banner);
+    });
+
+}
+</code></pre><p>将站点配置$config和$banner加入到缓存中：</p>
+<pre><code>public function boot() {
+    //基于闭包的composer
+    view()-&gt;composer(&apos;layouts.home&apos;, function ($view) {
+        $config = Cache::remember(&apos;config&apos;, 10060, function () {//获取key=config的数据，如果没有则使用闭包函数从数据库获取并存入缓存
+            return DB::table(&apos;config&apos;)-&gt;where(&apos;id&apos;, 1)-&gt;first();
+        });
+        $banner = Cache::remember(&apos;banner&apos;, 10060, function () {
+            return DB::table(&apos;image&apos;)-&gt;where(&apos;is_see&apos;, 1)-&gt;get();
+        });
+        $view-&gt;with(&apos;config&apos;, $config)-&gt;with(&apos;banner&apos;, $banner);
+    });
+}
+</code></pre><p>那么在第一次访问的时候借用laravel-debugbar调试器是这样的：</p>
+<p><img src="https://i.imgur.com/UGjLq7y.png" alt=""></p>
+<p>当第二次访问的时候：</p>
+<p><img src="https://i.imgur.com/1nivQRB.png" alt=""></p>
+<p>因为之前的全局数据以及文章详情都存入到了缓存中，所以没有查询数据库。</p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
         </div>
-    </nav>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/03/23/Lavaral使用（4）/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+    </div>
 
 
 

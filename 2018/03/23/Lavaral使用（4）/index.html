@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Archives: 2018 | IMCSI</title>
+<title>Lavaral使用（4） | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -121,81 +121,160 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-    	<h1 class="info">2018年 月</h1>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（5）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（5）/"> Lavaral使用（5） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（4）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（4）/"> Lavaral使用（4） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（3）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（3）/"> Lavaral使用（3） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（2）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（2）/"> Lavaral使用（2） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（1）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（1）/"> Lavaral使用（1） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Docker使用（Windows系统）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Docker使用（Windows系统）/"> Docker使用（Windows系统） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Thinkphp-jquery实现多图异步上传/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Thinkphp-jquery实现多图异步上传/"> Thinkphp+jquery实现多图异步上传 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Mysql相关小技巧总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Mysql相关小技巧总结在这里/"> Mysql相关小技巧总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/一些小问题将全部总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/一些小问题将全部总结在这里/"> 一些小问题将全部总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/PHP无极分类递归方法实现/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/PHP无极分类递归方法实现/"> PHP无极分类递归方法实现 </a>
-            </h3>  
-          </li>
-        
-    </ul>
-  </div>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Lavaral使用（4）">
+            
+	            Lavaral使用（4）
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/PHP">
+            PHP
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a href="/tags/laravel debugbar">
+               laravel debugbar
+            </a>
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/03/23</span>
+    </span>
 </div>
 
-    <nav class="pagination" role="navigation">
-        <div id="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class='fa fa-angle-right'></i></a>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>1.多视图共享数据<br>如题，如果我们有一些固定的网站内容，如联系方式，客服扣扣等，需要放在公用视图模板的头部或底部，如这样：</p>
+<p>在home.blade.php中</p>
+<pre><code>&lt;p&gt;手机：{{$config->linktel}} 丨 邮箱：{{$config->linkemail}} 丨 地址：{{$config->linkadress}}&lt;/p&gt;
+</code></pre><p>怎样在每个视图中都加载这些内容呢。</p>
+<p>1.直接使用View::share()方法来在每个视图层加载固定内容</p>
+<p>首先使用Artisan创建服务提供者</p>
+<pre><code>php artisan make:provider ComposerServiceProvider
+</code></pre><p>然后在config/app.php里注册提供者。在providers里加入：</p>
+<pre><code>&apos;providers&apos; =&gt; [
+
+    /*
+                 * Laravel Framework Service Providers...
+    */
+    Illuminate\Auth\AuthServiceProvider::class,
+    Illuminate\Broadcasting\BroadcastServiceProvider::class,
+    ........
+    App\Providers\RouteServiceProvider::class,
+    App\Providers\ComposerServiceProvider::class,//加入刚刚创建的提供者
+    Stevenyangecho\UEditor\UEditorServiceProvider::class,
+],
+</code></pre><p>然后在注册的提供者里面加入：</p>
+<pre><code>public function boot()
+{
+View::share(&apos;abc&apos;,&apos;beeasy&apos;);
+}
+</code></pre><p>这是使用外观模式，也可以直接使用view()方法，</p>
+<pre><code>view()-&gt;share(&apos;abc&apos;, &apos;beeasy&apos;);
+</code></pre><p>这样在视图层里面就能直接使用</p>
+<pre><code>{{$abc}}
+</code></pre><p>2.使用Composer单独对某个视图闭包来完成</p>
+<pre><code>public function boot() {
+    //基于闭包的composer
+    view()-&gt;composer(&apos;layouts.home&apos;, function ($view) {//绑定公用视图的前端页面
+        $config = DB::table(&apos;config&apos;)
+            -&gt;where(&apos;id&apos;, 1)
+            -&gt;first();
+        $view-&gt;with(&apos;config&apos;, $config);//将数据载入到视图
+    });
+}
+</code></pre><p>这样就能在layouts/home.blade.php视图下直接使用config变量了</p>
+<p>当然你也可以这样写：</p>
+<pre><code>public function boot() {
+    //基于闭包的composer
+    view()-&gt;composer(*, function ($view) {//绑定公用视图的前端页面
+        $config = DB::table(&apos;config&apos;)
+            -&gt;where(&apos;id&apos;, 1)
+            -&gt;first();
+        $view-&gt;with(&apos;config&apos;, $config);//将数据传递到视图
+    });
+}
+</code></pre><p>这样就能达到第一种方法的效果</p>
+<p>两种方法的区别：第一种方法是在每个视图层都传递数据，而第二种是针对某个视图层来传递数据，具体的选择方法还是要根据具体情况来定。</p>
+<p>2.安装laravel-debugbar来提高开发效率<br>1). 使用 Composer 安装该扩展包：</p>
+<pre><code>composer require barryvdh/laravel-debugbar
+</code></pre><p>2). 安装完成后，修改 config/app.php 在 providers 数组内追加 Debugbar 的 Provider</p>
+<pre><code>&apos;providers&apos; =&gt; [
+...
+Barryvdh\Debugbar\ServiceProvider::class,
+],
+</code></pre><p>同时在 aliases 数组内追加如下内容</p>
+<pre><code>&apos;aliases&apos; =&gt; [
+...
+&apos;Debugbar&apos; =&gt; Barryvdh\Debugbar\Facade::class,
+]
+</code></pre><p>3). 接下来运行以下命令生成此扩展包的配置文件 config/debugbar.php：</p>
+<pre><code>php artisan vendor:publish --provider=&quot;Barryvdh\Debugbar\ServiceProvider&quot;
+</code></pre><p>打开 config/debugbar.php，将 enabled 的值设置为：</p>
+<pre><code>&apos;enabled&apos; =&gt; env(&apos;APP_DEBUG&apos;, false),
+</code></pre><p>修改完以后, Debugbar 分析器的启动状态将由 .env文件中 APP_DEBUG 值决定。</p>
+<p>页面刷新后, 看到下图即表示运行成功。</p>
+<p><img src="https://i.imgur.com/1ImUL0w.png" alt=""></p>
+<p>原文地址：<a href="https://laravel-china.org/topics/2531" target="_blank" rel="noopener">https://laravel-china.org/topics/2531</a></p>
+<p>关闭功能只需要在debugbar.php文件中，将</p>
+<pre><code>&apos;enabled&apos; =&gt; env(&apos;APP_DEBUG&apos;, false),
+</code></pre><p>改为</p>
+<pre><code>&apos;enabled&apos; =&gt; env(&apos;DEBUGBAR_ENABLED&apos;, false),
+</code></pre>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
         </div>
-    </nav>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/03/23/Lavaral使用（5）/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2018/03/23/Lavaral使用（3）/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+    </div>
 
 
 

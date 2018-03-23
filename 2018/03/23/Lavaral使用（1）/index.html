@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Hello World | IMCSI</title>
+<title>Lavaral使用（1） | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -125,9 +125,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="Hello World">
+        <h1 id="Lavaral使用（1）">
             
-	            Hello World
+	            Lavaral使用（1）
             
         </h1>
         <div class="post-meta">
@@ -135,8 +135,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/ ">
-             
+        <a href="/categories/PHP">
+            PHP
         </a>
     </span>
     
@@ -145,7 +145,9 @@
         <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-                 
+            <a href="/tags/laravel ajax 模板继承 登陆验证 中间件">
+               laravel ajax 模板继承 登陆验证 中间件
+            </a>
             
         </span>
     </span>
@@ -162,16 +164,212 @@
     </div>
     
     <div class="post-body post-content">
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>1.ajax<br>使用ajax传递数据必须带上_token字段:</p>
+<pre><code>$.ajax({
+type:&apos;post&apos;,
+url:&quot;{{ url('admin/login/login')}} &quot;,
+data:{username:username,password:password,_token:&apos;&lt;?php echo csrf_token() ?&gt;&apos;},
+success:function(data){
+if(data==&apos;no&apos;){
+$(&apos;#success&apos;).text(&apos;用户名或密码错误&apos;).css(&apos;color&apos;,&apos;red&apos;);
+}else{
+window.location.href=&quot;{{ url('admin/login/login')}}&quot;;
+}
+}
+})
+</code></pre><p>后台返回ajax数据：</p>
+<pre><code>public function login(Request $request) {
+    $data = $request-&gt;all();
+    return response()-&gt;json(&apos;no&apos;); //ajax返回数据
+}
+</code></pre><p>2.保存未提交成功的数据</p>
+<pre><code>/**
+ * 用户登录验证
+ */
 
+public function login(Request $request) {
+    $data = $request-&gt;only(&apos;name&apos;, &apos;password&apos;);
+    if (Auth::attempt($data)) {
+        return &apos;ok&apos;;
+    }
+    return redirect(&apos;admin/login/index&apos;)-&gt;withInput($request-&gt;except(&apos;password&apos;))-&gt;with(&apos;msg&apos;, &apos;用户名或密码错误&apos;);
+//返回登陆页并返回除密码外的所有表单数据，添加一次性session错误提示
+    }
+</code></pre><p>在视图页用old获取之前的数据</p>
+<pre><code>&lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;{{ old('username') }}&quot;&gt;
+
+ {{ session('msg') }} //视图层获取错误信息
+</code></pre><p>3.模板继承<br>比头尾分离更加人性化</p>
+<p>制定头尾模板home.blade.php放入resouces/views/layouts/目录下：</p>
+<pre><code>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot;
+  content=&quot;width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0&quot;&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;ie=edge&quot;&gt;
+&lt;title&gt;@yield(&apos;title&apos;) - BeEasy博客&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+@yield(&apos;content&apos;)
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>其中变量用@yield()替代</p>
+<p>视图层模板继承：</p>
+<pre><code>@extends(&apos;layouts.home&apos;)
+
+@section(&apos;title&apos;, $title);
+
+@section(&apos;content&apos;)
+&lt;form action=&quot;{{ url('view/store') }}&quot; method=&quot;post&quot;&gt;
+{{ csrf_field() }}
+&lt;input type=&quot;text&quot; name=&quot;title&quot; value=&quot;&quot;&gt; &lt;br&gt;
+&lt;input type=&quot;text&quot; name=&quot;content&quot; value=&quot;&quot;&gt; &lt;br&gt;
+&lt;button type=&quot;submit&quot;&gt;提交&lt;/button&gt;
+&lt;/form&gt;
+@endsection
+</code></pre><p>其中块级元素必须有闭合标签</p>
+<p>4.中间件<br>比如后台管理员登陆后登陆超时将返回登陆</p>
+<pre><code>php artisan make:middleware AdminMiddleware
+</code></pre><p>使用Artisan命令快速创建中间件</p>
+<p>这个命令会在 app/Http/Middleware 目录下创建一个新的中间件类 Admin来检测用户是否登录</p>
+<pre><code>namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Support\Facades\Auth;
+
+class AdminMiddleware {
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next) {
+        if (Auth::guard(&apos;admin&apos;)-&gt;check()) {//检测用户是否登录
+            return $next($request);//执行登陆后的操作。可自行定制
+        } else {
+            return redirect(&apos;admin/login/index&apos;);//未登录则返回登陆页
+        }
+    }
+}
+</code></pre><p>中间件创建成功后我们需要注册中间件，不然使用起来会特别不方便：</p>
+<p>在 app/Http/Kernel.php 文件中</p>
+<pre><code>protected $routeMiddleware = [
+    &apos;auth&apos; =&gt; \Illuminate\Auth\Middleware\Authenticate::class,
+    &apos;auth.basic&apos; =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+    &apos;bindings&apos; =&gt; \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    &apos;can&apos; =&gt; \Illuminate\Auth\Middleware\Authorize::class,
+    &apos;guest&apos; =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,
+    &apos;throttle&apos; =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,
+    &apos;logincheck&apos; =&gt; \App\Http\Middleware\logincheckMiddleware::class,
+    &apos;admincheck&apos; =&gt; \App\Http\Middleware\AdminMiddleware::class,//给中间件设置别名，方面调用
+];
+</code></pre><p>如果你想要中间件在每一个 HTTP 请求期间被执行，只需要将相应的中间件类设置到 app/Http/Kernel.php 的数组属性 $middleware 中即可。</p>
+<p>有时候你可能想要通过指定一个键名的方式将相关中间件分到同一个组里面，从而更方便将其分配到路由中，这可以通过使用 HTTP Kernel 的 $middlewareGroups 属性实现。</p>
+<p>那么当你将后台登陆页面和登陆成功首页写好后，如何只在登陆成功页加入中间件检测登陆，而不在登陆页加上中间件？</p>
+<p>打开全局路由文件 routes/web.php</p>
+<pre><code>//admin模块
+Route::prefix(&apos;admin&apos;)-&gt;namespace(&apos;admin&apos;)-&gt;group(function () {
+    Route::prefix(&apos;login&apos;)-&gt;group(function () {
+        Route::get(&apos;index&apos;, &apos;LoginController@index&apos;);
+        Route::post(&apos;login&apos;, &apos;LoginController@login&apos;);
+    });
+    Route::group([&apos;middleware&apos; =&gt; [&apos;admincheck&apos;]], function () {
+//路由中间件，检测用户是否登录
+        Route::prefix(&apos;index&apos;)-&gt;group(function () {
+            Route::get(&apos;index&apos;, &apos;IndexController@index&apos;);
+            Route::post(&apos;loginout&apos;, &apos;IndexController@loginout&apos;);
+        });
+    });
+
+});
+</code></pre><p>那么其他需要登陆的页面方法，将路由规则写在注释下面就可以了。</p>
+<p>5.登陆账号密码验证<br>虽然laravel给我们提供了一套简单的用户注册登录流程，但是并不能完全满足我们的需求，比如我们管理员是在admin表，验证的是username和password。</p>
+<p>首先需要在 /config/auth.php文件中添加：</p>
+<pre><code>&apos;guards&apos; =&gt; [
+    &apos;web&apos; =&gt; [
+        &apos;driver&apos; =&gt; &apos;session&apos;,
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+    ],
+
+    &apos;api&apos; =&gt; [
+        &apos;driver&apos; =&gt; &apos;token&apos;,
+        &apos;provider&apos; =&gt; &apos;users&apos;,
+    ],
+    &apos;admin&apos; =&gt; [//定义后台的驱动和提供
+        &apos;driver&apos; =&gt; &apos;session&apos;,
+        &apos;provider&apos; =&gt; &apos;admin&apos;,
+
+    ],
+],
+</code></pre><p>添加配置</p>
+<pre><code>&apos;providers&apos; =&gt; [
+    &apos;users&apos; =&gt; [
+        &apos;driver&apos; =&gt; &apos;eloquent&apos;,
+        &apos;model&apos; =&gt; App\User::class,
+    ],
+
+    &apos;admin&apos; =&gt; [ //后台驱动以及模型 database驱动对应的是table表单
+        &apos;driver&apos; =&gt; &apos;eloquent&apos;,
+        &apos;model&apos; =&gt; App\Models\AdminUser::class,
+    ],
+    // &apos;users&apos; =&gt; [
+    // &apos;driver&apos; =&gt; &apos;database&apos;,
+    // &apos;table&apos; =&gt; &apos;users&apos;,
+    // ],
+],
+</code></pre><p>然后我们可以通过复制App目录下User.php</p>
+<pre><code>&lt;?php
+
+namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class AdminUser extends Authenticatable {
+    use Notifiable;
+    /**
+     * 关联到模型的数据库
+     */
+    protected $table = &apos;admin&apos;;
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [//验证的字段
+        &apos;username&apos;, &apos;password&apos;,
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        &apos;password&apos;, &apos;remember_token&apos;,
+    ];
+}
+</code></pre><p>然后在控制器里调用：</p>
+<pre><code>public function login(Request $request) {
+    $data = $request-&gt;only(&apos;username&apos;, &apos;password&apos;);
+    if (Auth::guard(&apos;admin&apos;)-&gt;attempt($data, $remember)) {
+        return redirect(&apos;admin/index/index&apos;);
+    }
+    return redirect(&apos;admin/login/index&apos;)-&gt;withInput($request-&gt;except(&apos;password&apos;))-&gt;with(&apos;msg&apos;, &apos;用户名或密码错误&apos;);
+}
+</code></pre><p>当然，如果你的网站只有后台管理员不涉及到前台用户，那么在auth.php里可修改默认配置：</p>
+<pre><code>&apos;defaults&apos; =&gt; [
+    &apos;guard&apos; =&gt; &apos;admin&apos;,//将默认改为admin
+    &apos;passwords&apos; =&gt; &apos;users&apos;,
+],
+</code></pre><p>这样在调用的时候不用指定guard：</p>
+<pre><code>Auth::attempt($data, $remember)
+</code></pre>
     </div>
 
     <div class="post-footer">   
@@ -188,8 +386,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/03/23/Linux服务器搭建vsftp/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+        <a href="/2018/03/23/Lavaral使用（2）/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
     
+    
+        <a href="/2018/03/23/Docker使用（Windows系统）/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
     
 </div>
 

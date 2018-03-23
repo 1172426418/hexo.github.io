@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Hello World | IMCSI</title>
+<title>Lavaral使用（2） | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -125,9 +125,9 @@
                     <p id="process"></p>
 <article class="post">
     <div class="post-head">
-        <h1 id="Hello World">
+        <h1 id="Lavaral使用（2）">
             
-	            Hello World
+	            Lavaral使用（2）
             
         </h1>
         <div class="post-meta">
@@ -135,8 +135,8 @@
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/ ">
-             
+        <a href="/categories/PHP">
+            PHP
         </a>
     </span>
     
@@ -145,7 +145,9 @@
         <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-                 
+            <a href="/tags/laravel UEditor 表单验证">
+               laravel UEditor 表单验证
+            </a>
             
         </span>
     </span>
@@ -162,15 +164,143 @@
     </div>
     
     <div class="post-body post-content">
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>1.富文本编辑器（UEditor）<br>laravel的依赖管理工具composer中可以快速的帮助我们集成ueditor到框架中，配置过程：</p>
+<p>在laravel项目根目录配置composer.json文件，在require中写入：</p>
+<pre><code>&quot;stevenyangecho/laravel-u-editor&quot;: &quot;~1.4&quot;
+</code></pre><p>然后在cmd模式下输入：composer update （需要将composer配置为全局变量）</p>
+<pre><code>PS E:\wamp\www\blog&gt; composer update
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+Package operations: 3 installs, 31 updates, 0 removals
+ - Updating symfony/polyfill-mbstring (v1.6.0 =&gt; v1.7.0): Downloading (100%)
+ - Updating symfony/var-dumper (v3.3.13 =&gt; v3.4.6): Downloading (100%)
+ - Updating symfony/debug (v3.3.13 =&gt; v3.4.6): Downloading (100%)
+.......//省略部分内容
+Package manifest generated successfully.
+</code></pre><p>更新完成之后，修改laravel的配置文件（config/app.php）:</p>
+<p>在 “providers” 这个key 最后加上 ：</p>
+<pre><code>Stevenyangecho\UEditor\UEditorServiceProvider::class
+</code></pre><p>在”aliases” 这个key最后加上：</p>
+<pre><code>&apos;UEditor&apos;=&gt;Stevenyangecho\UEditor\UEditorServiceProvider::class
+</code></pre><p>配置完之后，命令提示符进入项目的根目录：</p>
+<pre><code>PS E:\wamp\www&gt; cd blog
+PS E:\wamp\www\blog&gt; php artisan vendor:publish
+
+
+  [Symfony\Component\Debug\Exception\FatalThrowableError]
+  Class &apos;Stevenyangecho\UEditor\UEditorServiceProvider&apos; not found
+</code></pre><p>提示以上的错误要确定之前的步骤是否正确：</p>
+<pre><code>PS E:\wamp\www\blog&gt; php artisan vendor:publish
+
+ Which provider or tag&apos;s files would you like to publish?:
+  [0 ] Publish files from all providers and tags listed below
+.......
+ &gt; 0//输入0
+
+.......
+Publishing complete.
+</code></pre><p>出现以上信息说明已经配置完成。</p>
+<p>一串文件下载配置之后，laravel项目的public目录下会自动建立一个laravel-u-editor的文件夹。这个文件夹里包含的是编辑器本身的JS文件。同时在config文件夹下也会生成一个名为UEditorUpload.php的文件，这个是基础的配置文件。当这些文件都生成之后，说明编辑器已经在项目中集成好了，下一步就可以在视图文件中进行注入了</p>
+<p>前端视图中整合ue编辑器：</p>
+<p>首先引入JS等文件，因为laravel框架已经帮我们集成好了，直接在视图文件尾部加入</p>
+<p>@include(‘UEditor::head’) 即可</p>
+<p>然后加载编辑器的容器，最后实例化编辑器，这部分比较简单，直接贴代码：</p>
+<p> 加载编辑器的容器 </p>
+<pre><code>&lt;div id=&quot;detail_info&quot;&gt;
+&lt;script id=&quot;container&quot; name=&quot;content&quot; type=&quot;text/plain&quot; style=&quot;width: 900px;position:absolute;left:300px;top:120px;&quot;&gt;
+{!! html_entity_decode($article-&gt;content) !!} //将富文本编辑器内容转义并在页面上显示
+&lt;/script&gt;
+</code></pre><p> 实例化编辑器 </p>
+<pre><code>&lt;script&gt;
+
+var ue = UE.getEditor(&apos;container&apos;);
+ue.ready(function(){ 
+ue.execCommand(&apos;serverparam&apos;, &apos;_token&apos;, &apos;{{ csrf_token() }}&apos;); //这里添加laravel安全token：便于数据提交
+});
+&lt;/script&gt;
+</code></pre><p>2.表单验证<br>直接上代码：</p>
+<pre><code>public function store(Request $request) {
+    $data = $request-&gt;except(&apos;_token&apos;);//获取除token外的所有表单数据
+    $this-&gt;validate($request, [//验证表单值
+        &apos;title&apos; =&gt; &apos;requred&apos;,//设置title为必填
+        &apos;content&apos; =&gt; &apos;integer&apos;,//设置content整数
+
+    ], [
+        &apos;required&apos; =&gt; &apos;:attribute 为必填项&apos;,//自定义提示文字，默认为英文
+        &apos;min&apos; =&gt; &apos;:attribute 长度不符合要求&apos;,
+        &apos;integer&apos; =&gt; &apos;:attribute 必须为整数&apos;,
+    ], [
+        &apos;title&apos; =&gt; &apos;标题&apos;,//设置表单字段表示的含义
+        &apos;content&apos; =&gt; &apos;内容&apos;,
+    ]);//当验证未通过则自动返回表单页面，不会执行以下内容
+    $result = DB::table(&apos;news&apos;)
+        -&gt;insert($data);//数据插入
+    if ($result) {
+        return redirect()-&gt;back()-&gt;with(&apos;msg&apos;, &apos;操作成功&apos;);//插入成功，返回添加页
+    } else {
+        return redirect()-&gt;back()-&gt;with(&apos;msg&apos;, &apos;操作失败&apos;)-&gt;withInput();//插入失败，返回添加页并提示错误，将原表单数据返回
+    }
+}
+</code></pre><p>在页面上显示提示：</p>
+<pre><code>@if (count($errors) &gt; 0)//$errors 变量在每次请求的所有视图中都可以被使用，你可以很方便的假设 $errors 变量已被定义且进行安全地使用。
+  &lt;div class=&quot;alert alert-danger&quot;&gt;//验证未通过则返回错误信息
+    &lt;ul&gt;
+      @foreach ($errors-&gt;all() as $error)
+        &lt;li&gt;{{ $error }}&lt;/li&gt;
+      @endforeach
+    &lt;/ul&gt;
+  &lt;/div&gt;
+@endif
+
+&lt;fieldset&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;label class=&quot;col-sm-2 control-label&quot;&gt;资讯标题&lt;/label&gt;
+      {{session('success')}}//此处返回表单验证通过后闪存中session的信息
+        &lt;div class=&quot;col-sm-6&quot;&gt;
+            &lt;input value=&quot;{{old('title')}}&quot; class=&quot;form-control&quot; id=&quot;title&quot; type=&quot;text&quot; name=&quot;title&quot;  style=&quot;width:40%;&quot;/&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre><p>3.数据筛选和分页</p>
+<pre><code>public function index(Request $request) {
+    if ($request-&gt;input(&apos;category_id&apos;)) {//判断是否带有分类id
+        $category_id = $request-&gt;input(&apos;category_id&apos;);//获取分类id
+        if ($category_id == &apos;all&apos;) {//判断是否是所有分类
+            $news = DB::table(&apos;news&apos;)
+                -&gt;select(&apos;id&apos;, &apos;title&apos;, &apos;category_id&apos;, &apos;addtime&apos;)
+                -&gt;orderBy(&quot;id&quot;, &quot;desc&quot;)
+                -&gt;paginate(10);
+        } else {//否则执行where查询单个分类
+            $news = DB::table(&apos;news&apos;)
+                -&gt;select(&apos;id&apos;, &apos;title&apos;, &apos;category_id&apos;, &apos;addtime&apos;)
+                -&gt;where(&apos;category_id&apos;, $category_id)
+                -&gt;orderBy(&quot;id&quot;, &quot;desc&quot;)
+                -&gt;paginate(10);
+        }
+    } else {//不带分类id则默认加上，方便在分页里调用
+        $news = DB::table(&apos;news&apos;)
+            -&gt;select(&apos;id&apos;, &apos;title&apos;, &apos;category_id&apos;, &apos;addtime&apos;)
+            -&gt;orderBy(&quot;id&quot;, &quot;desc&quot;)
+            -&gt;paginate(10);
+        $category_id = &apos;all&apos;;
+    }
+
+    $category = DB::table(&apos;category&apos;)
+        -&gt;get();
+    $assign = array(
+        &apos;news&apos; =&gt; $news,
+        &apos;category&apos; =&gt; $category,
+        &apos;category_id&apos; =&gt; $category_id,//用于记住分类id
+    );
+    return view(&apos;admin.news.index&apos;, $assign);
+}
+</code></pre><p>重点在于：</p>
+<p>默认的分页展示写法是这样的：</p>
+<pre><code>{!! $news-&gt;links() !!}
+</code></pre><p>那么当分页筛选成功后，点击下一页则无法按照条件筛选，因为category_id没有存入到分页的url。我们需要将分类id加入到分页url中才能记住用户选择的分类id：</p>
+<pre><code>{!! $news-&gt;appends(array(&apos;category_id&apos;=&gt;$category_id))-&gt;links() !!}
+</code></pre><p>那么生成的分页url是这样的：</p>
+<pre><code>http://www.blog.com/admin/news/index?category_id=1&amp;page=2
+</code></pre><p>就能记住用户选择的分类id进行where条件筛选。</p>
 
     </div>
 
@@ -188,8 +318,10 @@
 
 <div class="article-nav prev-next-wrap clearfix">
     
-        <a href="/2018/03/23/Linux服务器搭建vsftp/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+        <a href="/2018/03/23/Lavaral使用（3）/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
     
+    
+        <a href="/2018/03/23/Lavaral使用（1）/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
     
 </div>
 

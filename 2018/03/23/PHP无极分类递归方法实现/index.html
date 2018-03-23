@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Archives: 2018 | IMCSI</title>
+<title>PHP无极分类递归方法实现 | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -121,81 +121,171 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-    	<h1 class="info">2018年 月</h1>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（5）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（5）/"> Lavaral使用（5） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（4）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（4）/"> Lavaral使用（4） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（3）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（3）/"> Lavaral使用（3） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（2）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（2）/"> Lavaral使用（2） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（1）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（1）/"> Lavaral使用（1） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Docker使用（Windows系统）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Docker使用（Windows系统）/"> Docker使用（Windows系统） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Thinkphp-jquery实现多图异步上传/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Thinkphp-jquery实现多图异步上传/"> Thinkphp+jquery实现多图异步上传 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Mysql相关小技巧总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Mysql相关小技巧总结在这里/"> Mysql相关小技巧总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/一些小问题将全部总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/一些小问题将全部总结在这里/"> 一些小问题将全部总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/PHP无极分类递归方法实现/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/PHP无极分类递归方法实现/"> PHP无极分类递归方法实现 </a>
-            </h3>  
-          </li>
-        
-    </ul>
-  </div>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="PHP无极分类递归方法实现">
+            
+	            PHP无极分类递归方法实现
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/PHP">
+            PHP
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a href="/tags/递归 php">
+               递归 php
+            </a>
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/03/23</span>
+    </span>
 </div>
 
-    <nav class="pagination" role="navigation">
-        <div id="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class='fa fa-angle-right'></i></a>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>在做权限相关模块的功能，我们需要给不同的用户指定不同功能权限。</p>
+<p>首先我们需要一张分类的表格。类似于这样：</p>
+<p><img src="https://i.imgur.com/Ix6npqC.png" alt=""></p>
+<p>其中category_id表示的是分类id，category_name表示的是分类名，pid代表的就是父级分类id，我们可以将顶级的pid设置为0，以递归算法实现父级以下包涵所有子级：</p>
+<pre><code>/**
+ * 无极分类递归 选择权限
+*   @param   int $assortPid   要查询分类的父级id
+*   @param   mixed   $tag 上下级分类之间的分隔符
+*   @param   array   $list包涵权限的数组
+*   @return  string  $tree返回的分类树型结构结果 
+*
+*/
+function recursiveAssort($assortPid, $tag = &apos;&apos;,$list)
+{   
+
+$assort = M(&apos;category&apos;)-&gt;where(&quot;pid = $assortPid&quot;)-&gt;field(&apos;category_id, category_name&apos;)-&gt;order(&quot;category_id asc&quot;)-&gt;select();
+foreach ($assort as $value) {
+  if(in_array($value[&apos;category_id&apos;], $list)){
+$tree .= &apos;&lt;li&gt;&apos;.$tag.&apos;&lt;input type=&quot;checkbox&quot; checked=&quot;checked&quot; name=&quot;permission[]&quot; value=&quot;&apos; . $value[&apos;category_id&apos;] . &apos;&quot;&gt;&apos; .&quot;&lt;label for=&apos;role_2&apos;&gt;&quot;.$value[&apos;category_name&apos;].&quot;&lt;/label&gt;&lt;/li&gt;&quot;;
+$tree .= recursiveAssort($value[&apos;category_id&apos;], $tag.&apos;├ &apos;,$list);
+  }else{
+$tree .= &apos;&lt;li&gt;&apos;.$tag.&apos;&lt;input type=&quot;checkbox&quot; name=&quot;permission[]&quot; value=&quot;&apos; . $value[&apos;category_id&apos;] . &apos;&quot;&gt;&apos; .&quot;&lt;label for=&apos;role_2&apos;&gt;&quot;.$value[&apos;category_name&apos;].&quot;&lt;/label&gt;&lt;/li&gt;&quot;;
+$tree .= recursiveAssort($value[&apos;category_id&apos;], $tag.&apos;├ &apos;,$list);
+  }
+}
+return $tree;
+}
+</code></pre><p>比如</p>
+<p>$list=[1,3,4];<br>那么分类id为1,3,4的分类将会自动添加钩中的样式。</p>
+<p>相当于先遍历出pid=0的所有顶级菜单，然后再次调用自身查询当前顶级菜单下的子级菜单，以此类推，直到查询结束。同时以字符串拼接的方式存放在$tree里。</p>
+<p>以下为工作中改良后的版本，实现的效果如下：</p>
+<p><img src="https://i.imgur.com/UAcpdqu.png" alt=""></p>
+<p>源代码：</p>
+<pre><code>&lt;li class=&quot;level0&quot;&gt;
+&lt;a href=&quot;&quot;&gt;
+&lt;i class=&quot;icon-cogs&quot;&gt;&lt;/i&gt;
+&lt;span class=&quot;title&quot;&gt;基础设置&lt;/span&gt;
+&lt;span class=&quot;arrow&quot;&gt;&lt;/span&gt;
+&lt;/a&gt;
+&lt;ul class=&quot;sub-menu&quot;&gt;
+&lt;li class=&quot;level1&quot;&gt;
+&lt;a href=&quot;&quot;&gt;
+&lt;i class=&quot;icon-home&quot;&gt;&lt;/i&gt;
+&lt;span class=&quot;title&quot;&gt;管理中心&lt;/span&gt;
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li class=&quot;level1&quot;&gt;
+&lt;a href=&quot;&quot;&gt;
+&lt;i class=&quot;icon-globe&quot;&gt;&lt;/i&gt;
+&lt;span class=&quot;title&quot;&gt;站点配置&lt;/span&gt;
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;li class=&quot;level1&quot;&gt;
+&lt;a href=&quot;&quot;&gt;
+&lt;i class=&quot;icon-user&quot;&gt;&lt;/i&gt;
+&lt;span class=&quot;title&quot;&gt;管理员&lt;/span&gt;
+&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+ &lt;/li&gt;
+</code></pre><p>改版后的递归方法：</p>
+<pre><code>/**
+ * 无极分类递归 菜单加载
+*   @param   int $assortPid   要查询分类的父级id
+*   @param   mixed   $tag 上下级分类之间的分隔符
+*   @param   array   $list包涵权限的数组
+*   @return  string  $tree返回的分类树型结构结果 
+*
+*/
+function recursiveAssort_menu($assortPid,$list,$tag = &apos;&lt;li class=&quot;level0&quot;&gt;&apos;,$tag2=&apos;&lt;ul class=&quot;sub-menu&quot;&gt;&apos;,$tag3=&apos;&lt;span class=&quot;arrow&quot;&gt;&lt;/span&gt;&apos;,$tag4=&apos;&lt;/ul&gt;&lt;/li&gt;&apos;)
+{   
+$assort = M(&apos;category&apos;)-&gt;where(&quot;pid = $assortPid&quot;)-&gt;field(&apos;category_id, category_name,url,icon&apos;)-&gt;order(&quot;category_id asc&quot;)-&gt;select();
+
+foreach ($assort as $value) {
+
+  if(in_array($value[&apos;category_id&apos;], $list)){
+$tree.=$tag;
+$tree.= &apos;&lt;a href=&quot;&apos;.$value[&apos;url&apos;].&apos;&quot;&gt; &lt;i class=&quot;&apos;.$value[&apos;icon&apos;].&apos;&quot;&gt;&lt;/i&gt;&lt;span class=&quot;title&quot;&gt;&apos;.$value[&apos;category_name&apos;].&apos;&lt;/span&gt;&apos;.$tag3.&apos;&lt;/a&gt;&apos;.$tag2;
+$tree.= recursiveAssort_menu($value[&apos;category_id&apos;],$list,&apos;&lt;li class=&quot;level1&quot;&gt;&apos;,&apos;&apos;,&apos;&apos;,&apos;&lt;/li&gt;&apos;);
+$tree.=$tag4;
+
+
+  }
+
+}
+return $tree;
+}
+</code></pre>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
         </div>
-    </nav>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/03/23/一些小问题将全部总结在这里/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2018/03/23/Linux下MYSQL开启远程访问权限/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+    </div>
 
 
 

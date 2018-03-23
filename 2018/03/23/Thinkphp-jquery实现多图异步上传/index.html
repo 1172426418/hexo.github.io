@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Archives: 2018 | IMCSI</title>
+<title>Thinkphp+jquery实现多图异步上传 | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -121,81 +121,249 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-    	<h1 class="info">2018年 月</h1>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（5）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（5）/"> Lavaral使用（5） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（4）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（4）/"> Lavaral使用（4） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（3）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（3）/"> Lavaral使用（3） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（2）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（2）/"> Lavaral使用（2） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（1）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（1）/"> Lavaral使用（1） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Docker使用（Windows系统）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Docker使用（Windows系统）/"> Docker使用（Windows系统） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Thinkphp-jquery实现多图异步上传/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Thinkphp-jquery实现多图异步上传/"> Thinkphp+jquery实现多图异步上传 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Mysql相关小技巧总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Mysql相关小技巧总结在这里/"> Mysql相关小技巧总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/一些小问题将全部总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/一些小问题将全部总结在这里/"> 一些小问题将全部总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/PHP无极分类递归方法实现/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/PHP无极分类递归方法实现/"> PHP无极分类递归方法实现 </a>
-            </h3>  
-          </li>
-        
-    </ul>
-  </div>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Thinkphp+jquery实现多图异步上传">
+            
+	            Thinkphp+jquery实现多图异步上传
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/PHP">
+            PHP
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a href="/tags/tp">
+               tp
+            </a>
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/03/23</span>
+    </span>
 </div>
 
-    <nav class="pagination" role="navigation">
-        <div id="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class='fa fa-angle-right'></i></a>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>网上查找了很多方法，有的多图上传是通过html添加多个input框type=file，然后在后台遍历循环$_FILES实现一张张上传图片。还有一种就是通过jq将图片转码成base64来将图片存储成字符串的形式，然后后台将获取到的字符串通过解码成图片文件保存，这里要说的就是这种方法。</p>
+<p>html页面主要部分如下：</p>
+<pre><code>&lt;div class=&quot;weui-cells weui-cells_form&quot; id=&quot;uploader&quot;&gt;
+    &lt;div class=&quot;weui-cell&quot;&gt;
+        &lt;div class=&quot;weui-cell__bd&quot;&gt;
+            &lt;div class=&quot;weui-uploader&quot;&gt;
+                &lt;input name=&quot;goods_id&quot; value=&quot;{$goods_id}&quot; type=&quot;hidden&quot;&gt;
+                &lt;div class=&quot;weui-uploader__bd&quot;&gt;
+                    &lt;ul class=&quot;weui-uploader__files&quot; id=&quot;uploaderFiles&quot;&gt;&lt;/ul&gt;
+                    &lt;div class=&quot;weui-uploader__input-box&quot;&gt;
+                        &lt;div class=&quot;file-img&quot;&gt;
+                            &lt;i&gt;&lt;/i&gt;
+                            &lt;p&gt;添加图片&lt;/p&gt;
+                        &lt;/div&gt;
+
+                        &lt;input id=&quot;uploaderInput&quot; class=&quot;weui-uploader__input&quot; name=&quot;img&quot; type=&quot;file&quot; accept=&quot;image/*&quot; capture=&quot;camera&quot; multiple=&quot;&quot; /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>jq部分：</p>
+<pre><code>/* 图片手动上传 */
+var uploadCustomFileList = [];
+var uploadCount = 0;
+
+weui.uploader(&apos;#uploader&apos;, {
+// url: &apos;http://localhost:8002/upload&apos;,
+auto: false,
+type:&apos;base64&apos;,
+onQueued: function onQueued() {
+uploadCustomFileList.push(this);
+
+//console.log(this.url.match(/url\((.*?)\)/)[1].replace(/&quot;/g, &apos;&apos;));
+},
+onBeforeQueued: function (files) {
+// `this` 是轮询到的文件, `files` 是所有文件
+
+if ([&quot;image/jpg&quot;, &quot;image/jpeg&quot;, &quot;image/png&quot;, &quot;image/gif&quot;].indexOf(this.type) &lt; 0) {
+weui.alert(&apos;请上传图片&apos;);
+return false; // 阻止文件添加
+}
+if (this.size &gt; 2 * 1024 * 1024) {
+weui.alert(&apos;请上传不超过2M的图片&apos;);
+return false;
+}
+if (files.length &gt; 3) { // 防止一下子选择过多文件
+weui.alert(&apos;最多只能上传3张图片，请重新选择&apos;);
+return false;
+}
+if (uploadCount + 1 &gt; 3) {
+weui.alert(&apos;最多只能上传3张图片&apos;);
+return false;
+}
+
+++uploadCount;
+
+//return true; // 阻止默认行为，不插入预览图的框架
+},
+});
+</code></pre><p>将上传的图片转码成base64</p>
+<pre><code>// 缩略图预览
+document.querySelector(&apos;#uploaderFiles&apos;).addEventListener(&apos;click&apos;, function (e) {
+var target = e.target;
+// var _that = this.children.length;
+// console.log(_that);
+
+while (!target.classList.contains(&apos;weui-uploader__file&apos;) &amp;&amp; target) {
+target = target.parentNode;
+
+}
+if (!target) return;
+
+var url = target.getAttribute(&apos;style&apos;) || &apos;&apos;;
+var id = target.getAttribute(&apos;data-id&apos;);
+
+if (url) {
+url = url.match(/url\((.*?)\)/)[1].replace(/&quot;/g, &apos;&apos;);
+}
+var gallery = weui.gallery(url, {
+onDelete: function onDelete() {
+weui.confirm(&apos;确定删除该图片？&apos;, function () {
+var index;
+for (var i = 0, len = uploadCustomFileList.length; i &lt; len; ++i) {
+var file = uploadCustomFileList[i];
+if (file.id == id) {
+index = i;
+break;
+}
+}
+if (index !== undefined) uploadCustomFileList.splice(index, 1);
+
+ uploadCount --;
+
+target.remove();
+gallery.hide();
+
+});
+}
+});
+});
+</code></pre><p>这是生成缩略图预览</p>
+<pre><code>$(function () {
+
+$(&quot;form&quot;).submit(function(){
+
+var arr=[];
+var urls=$(&quot;[name=upload_url]&quot;).val();
+  $(&quot;#uploaderFiles&quot;).find(&quot;li&quot;).each(function(index,item){
+var data_id = $(item).data(&quot;id&quot;);
+   var img_url = $(item)[0].style.backgroundImage.split(&quot;\&quot;&quot;)[1];
+
+//.split(&quot;\&quot;&quot;)[1]
+arr[index]=img_url;
+//console.log(data_id);
+//console.log(img_url);
+  })
+
+  $.ajax({
+type:&apos;post&apos;,
+url:urls,
+async:false,
+data:{result:arr},
+success:function(msg){
+console.log(msg);
+}
+  })
+  console.log(arr);
+return  false;
+});
+})
+</code></pre><p>以上是将转码成base64的图片存到一个二维数组里面，方便后台遍历存储。</p>
+<p>jquery传递的数据大致如下：</p>
+<p><img src="https://i.imgur.com/tQSb2iq.png" alt=""></p>
+<p>这是传递两个图片的例子，当只有一个图片的时候二维数组的长度（length）即为1。</p>
+<p>后台接收处理图片：</p>
+<pre><code>/**
+ * 异步上传图片
+ */
+public function upload_img() {
+    if (IS_AJAX) {
+        $data = I(&quot;result&quot;);
+        foreach ($data as $key =&gt; $value) {
+
+            list($type, $datas) = explode(&apos;,&apos;, $value);//获取图片类型，以及转码后的图片
+            if (strstr($type, &apos;image/jpeg&apos;) !== &apos;&apos;) {//判断图片类型
+                $ext = &apos;.jpg&apos;;
+            } elseif (strstr($type, &apos;image/gif&apos;) !== &apos;&apos;) {
+                $ext = &apos;.gif&apos;;
+            } elseif (strstr($type, &apos;image/png&apos;) !== &apos;&apos;) {
+                $ext = &apos;.png&apos;;
+            }
+
+            $photo = __ROOT__ . &quot;/uploads/Goods/&quot; . date(&quot;Y-m-d&quot;, time()) . &apos;/&apos; . time() . $key . $ext;//生成图片地址和文件并加上图片后缀
+
+            // 生成文件
+            file_put_contents($photo, base64_decode($datas), true);//解码图片进行保存
+        }
+        $this-&gt;ajaxReturn(&quot;ok&quot;);
+    }
+}
+</code></pre><p>接收到的数据就是一个二维数组，内容类似：</p>
+<pre><code>[&quot;data:image\/jpeg;base64,\/9j\/4AAQSkZJRgABgk..&quot;,data:image\/jpeg;base64,\/9j\HBwYIChAKCgk..&quot;]
+</code></pre><p>大概就是二维数组中的每个数组都是一个很长的字符串，其中base64后面就是经转码后的图片。我们要做的就是将图片还原然后保存。</p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
         </div>
-    </nav>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/03/23/Docker使用（Windows系统）/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2018/03/23/Mysql相关小技巧总结在这里/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+    </div>
 
 
 

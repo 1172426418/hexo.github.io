@@ -27,7 +27,7 @@
     <!--Title-->
 
 
-<title>Archives: 2018 | IMCSI</title>
+<title>Centos下LNMP环境搭建 | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -121,81 +121,121 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    <div id="main">
-  <div id="post-list">
-    <ul class="archives-post-list">
-    	<h1 class="info">2018年 月</h1>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（5）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（5）/"> Lavaral使用（5） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（4）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（4）/"> Lavaral使用（4） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（3）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（3）/"> Lavaral使用（3） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（2）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（2）/"> Lavaral使用（2） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Lavaral使用（1）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Lavaral使用（1）/"> Lavaral使用（1） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Docker使用（Windows系统）/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Docker使用（Windows系统）/"> Docker使用（Windows系统） </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Thinkphp-jquery实现多图异步上传/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Thinkphp-jquery实现多图异步上传/"> Thinkphp+jquery实现多图异步上传 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/Mysql相关小技巧总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/Mysql相关小技巧总结在这里/"> Mysql相关小技巧总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/一些小问题将全部总结在这里/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/一些小问题将全部总结在这里/"> 一些小问题将全部总结在这里 </a>
-            </h3>  
-          </li>
-        
-          <li class="post-items" _href="/2018/03/23/PHP无极分类递归方法实现/">
-            <h3 class="post-item-title">
-            	<a href="/2018/03/23/PHP无极分类递归方法实现/"> PHP无极分类递归方法实现 </a>
-            </h3>  
-          </li>
-        
-    </ul>
-  </div>
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="Centos下LNMP环境搭建">
+            
+	            Centos下LNMP环境搭建
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/Linux">
+            Linux
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a href="/tags/mysql nginx php">
+               mysql nginx php
+            </a>
+            
+        </span>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-clock-o"></i>
+        <span class="date-meta">2018/03/23</span>
+    </span>
 </div>
 
-    <nav class="pagination" role="navigation">
-        <div id="page-nav">
-            <span class="page-number current">1</span><a class="page-number" href="/archives/2018/page/2/">2</a><a class="extend next" rel="next" href="/archives/2018/page/2/"><i class='fa fa-angle-right'></i></a>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>1,.安装Nginx</p>
+<p>添加CentOS 7 Nginx yum资源库</p>
+<p>rpm -Uvh <a href="http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm" target="_blank" rel="noopener">http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</a><br>安装：</p>
+<p>yum -y install nginx<br>启动：</p>
+<p>systemctl start nginx.service<br>设置开机启动：</p>
+<p>systemctl enable nginx.service<br>nginx配置：</p>
+<p>默认配置文件在 /etc/nginx/conf.d/default.conf</p>
+<p>我们只需要复制一份配置文件来实现根据域名来访问不同的目录</p>
+<p>cp default.conf beeasy.conf<br>然后beeasy.conf的配置如下：<br><img src="https://i.imgur.com/Bbs4OzM.png" alt=""></p>
+<p>server_name 即配置的访问域名</p>
+<p>root 后面即为访问该域名的根目录</p>
+<p>该配置解决了在WordPress框架下修改固定链接后除首页其他页面404的问题。</p>
+<p>重启nginx：</p>
+<p>systemctl restart nginx.service<br>2.安装php7.0</p>
+<p>添加CentOS 7 php7 yum资源库</p>
+<p>rpm -Uvh <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" target="_blank" rel="noopener">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a><br>rpm -Uvh <a href="https://mirror.webtatic.com/yum/el7/webtatic-release.rpm" target="_blank" rel="noopener">https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</a><br>安装：</p>
+<p>yum install php70w php70w-opcache<br>yum install php70w-fpm php70w-opcache<br>yum install php70w-mysql<br>你也可以安装一些其他扩展：</p>
+<p>yum install yum-plugin-replace<br>yum replace php-common –replace-with=php70w-common<br>还包涵一些其他的扩展包，可以根据需求安装：</p>
+<p>php70w-dba，php70w-devel，php70w-embedded，php70w-enchant，php70w-gd，php70w-pdo等。。</p>
+<p>可参考<a href="https://webtatic.com/packages/php70/" target="_blank" rel="noopener">https://webtatic.com/packages/php70/</a></p>
+<p>3.安装mysql</p>
+<p>yum -y install mysql<br>安装mysql-server</p>
+<p>yum -y install mysql-server<br>虽然可能会报错，但是不要慌</p>
+<p>wget <a href="http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm" target="_blank" rel="noopener">http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</a></p>
+<p>rpm -ivh mysql-community-release-el7-5.noarch.rpm</p>
+<p>yum install mysql-community-server<br>然后需要确定几次，都按y回车即可</p>
+<p>安装mysql扩展包：</p>
+<p>yum -y install mysql-connector-odbc mysql-devel libdbi-dbd-mysql<br>重启对应服务：</p>
+<p>service mysqld restart</p>
+<p>service php-fpm start</p>
+<p>service nginx restart<br>初次安装mysql是没有密码的,我们要设置密码，mysql的默认账户为root</p>
+<p>设置 MySQL 数据 root 账户的密码：</p>
+<p>命令：</p>
+<p>mysql_secure_installation<br>当出现如下提示时候直接按回车：</p>
+<p>Enter current password for root<br>出现如下再次回车：</p>
+<p>Set root password? [Y/n]<br>出现如下提示输入你需要设置的密码，这里输入了root,输入密码是不显示的，回车后再输入一次确认：</p>
+<p>Remove anonymous users? [Y/n]<br>Disallow root login remotely? [Y/n]<br>Remove test database and access to it? [Y/n]<br>Reload privilege tables now? [Y/n]<br>以上的教程都是搭建完成以后写的，如果存在问题，还请指出。</p>
+
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
         </div>
-    </nav>
+        <div>
+            
+        </div>  
+    </div>
+</article>
+
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2018/03/23/Linux下MYSQL开启远程访问权限/" class="pre-post btn btn-default"><i class="fa fa-angle-left fa-fw"></i>上一篇</a>
+    
+    
+        <a href="/2018/03/23/Centos7-配置https协议/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
+
+
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
+    </div>
 
 
 
