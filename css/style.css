@@ -90,8 +90,8 @@ a img {
   border-radius: 2px;
 }
 .btn-default {
-  border: 1px solid #e67e22;
-  background: #e67e22;
+  border: 1px solid #17bebb;
+  background: #17bebb;
   color: #fff;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -854,13 +854,14 @@ pre {
 .widget .tag-cloud a {
   border: 1px solid #ebebeb;
   padding: 2px 7px;
-  color: #959595;
+  color: #fff;
   font-size: 1em!important;
   line-height: 1.5em;
   display: inline-block;
   margin: 0 7px 7px 0;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
+      border-radius: 6px;
 }
 .widget .tag-cloud a:hover {
   color: #fff;
@@ -904,10 +905,10 @@ pre {
   float: right;
   width: 25%;
   height: 32px;
-  background: #e67e22;
+  background: #17bebb;
   color: #fff;
   border-radius: 0 4px 4px 0;
-  border: 1px solid #e67e22;
+  border: 1px solid #17bebb;
 }
 .widget #search-form #result-mask {
   position: fixed;
