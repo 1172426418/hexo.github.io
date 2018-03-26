@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 <head>
     <!--Setting-->
     <meta charset="UTF-8">
@@ -13,10 +13,14 @@
     <meta name="format-detection" content="telephone=no,email=no,adress=no">
     <meta name="browsermode" content="application">
     <meta name="screen-orientation" content="portrait">
-    <link rel="dns-prefetch" href="http://yoursite.com">
+    <link rel="dns-prefetch" href="http://imcsi.cn">
     <!--SEO-->
 
+<meta name="description" content="陈思的个人博客,记录个人的学习心得以及分享一些技术,包括thinkphp，laravel等相关框架"/>
 
+
+
+<meta name="keywords" content="博客,个人博客,imcsi,陈思,陈思个人博客,imcsi.cn,php博客,phper心得,php个人博客,laravel博客"/>
 
 
 
@@ -161,95 +165,34 @@
 <p>安装好了之后桌面上会出现一个这样的图标：</p>
 <p><img src="https://i.imgur.com/ddozzz9.png" alt=""></p>
 <p>双击之后出现running就ok了</p>
-<p>然后打开命令提示符输入：</p>
-<pre><code>docker version
-
-PS C:\WINDOWS\system32&gt; docker version
-Client:
- Version:   17.12.0-ce
- API version:   1.35
- Go version:go1.9.2
- Git commit:c97c6d6
- Built: Wed Dec 27 20:05:22 2017
- OS/Arch:   windows/amd64
-
-Server:
- Engine:
-  Version:  17.12.0-ce
-  API version:  1.35 (minimum version 1.12)
-  Go version:   go1.9.2
-  Git commit:   c97c6d6
-  Built:Wed Dec 27 20:12:29 2017
-  OS/Arch:  linux/amd64
-  Experimental: true
-</code></pre><p>会出现很多版本相关信息。</p>
-<pre><code>PS C:\WINDOWS\system32&gt; docker images //查看当前已有镜像
-REPOSITORY  TAG IMAGE ID
-CREATED SIZE
-centos  latest  2d194b392dd1
-32 hours ago195MB
-docker4w/nsenter-dockerdlatest  cae870735e91
-4 months ago187kB
-registry.cn-hangzhou.aliyuncs.com/diligentyang/centos6.7_nginx_1.10_php5.6.29   v1.0072258802250
-14 months ago   854MB
-</code></pre><p>关于镜像可以使用命令：</p>
-<pre><code>docker search centos
-</code></pre><p>来查找与centos相关的镜像</p>
-<pre><code>PS C:\WINDOWS\system32&gt; docker search centos
-NAME   DESCRIPTION STARS   OFFICIAL
-   AUTOMATED
-centos The official build of CentOS.   4079[OK]
-
-ansible/centos7-ansibleAnsible on Centos7  105
-</code></pre><p>其中越靠前是STARS越多，相当于使用的人最多，当我们选择了一个镜像后查看它的AUTOMATED就能直接拉取镜像</p>
-<pre><code>docker pull registry.cn-hangzhou.aliyuncs.com/diligentyang/centos6.7_nginx_1.10_php5.6.29:v1.0
-</code></pre><p>这里使用的是一个阿里云搭建的php5.6+nginx1.10的镜像</p>
-<pre><code>$ docker run -p 80:80 --name ali -it 5a7e /bin/bash
-</code></pre><p>docker run ：创建一个新的容器并运行一个命令，常用参数:</p>
-<ul>
-<li>-i: 以交互模式运行容器，通常与 -t 同时使用；</li>
-<li>-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用</li>
-<li>–name=”nginx-lb”: 为容器指定一个名称；</li>
-<li>-P 将容器的80端口映射到主机随机端口。</li>
-<li>-p 80:80 将容器的80端口映射到主机的80端口</li>
-<li>-v 映射主机目录和容器目录</li>
-</ul>
+<p>然后打开命令提示符输入：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line"></span><br><span class="line">PS C:\WINDOWS\system32&gt; docker version</span><br><span class="line">Client:</span><br><span class="line"> Version:   <span class="number">17.12</span><span class="number">.0</span>-ce</span><br><span class="line"> API version:   <span class="number">1.35</span></span><br><span class="line"> Go version:go1<span class="number">.9</span><span class="number">.2</span></span><br><span class="line"> Git commit:c97c6d6</span><br><span class="line"> Built: Wed Dec <span class="number">27</span> <span class="number">20</span>:<span class="number">05</span>:<span class="number">22</span> <span class="number">2017</span></span><br><span class="line"> OS/Arch:   windows/amd64</span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Engine:</span><br><span class="line">  Version:  <span class="number">17.12</span><span class="number">.0</span>-ce</span><br><span class="line">  API version:  <span class="number">1.35</span> (minimum version <span class="number">1.12</span>)</span><br><span class="line">  Go version:   go1<span class="number">.9</span><span class="number">.2</span></span><br><span class="line">  Git commit:   c97c6d6</span><br><span class="line">  Built:Wed Dec <span class="number">27</span> <span class="number">20</span>:<span class="number">12</span>:<span class="number">29</span> <span class="number">2017</span></span><br><span class="line">  OS/Arch:  linux/amd64</span><br><span class="line">  Experimental: <span class="keyword">true</span></span><br></pre></td></tr></table></figure></p>
+<p>会出现很多版本相关信息。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PS C:\WINDOWS\system32&gt; docker images <span class="comment">//查看当前已有镜像</span></span><br><span class="line">REPOSITORY  TAG IMAGE ID</span><br><span class="line">CREATED SIZE</span><br><span class="line">centos  latest  <span class="number">2</span>d194b392dd1</span><br><span class="line"><span class="number">32</span> hours ago195MB</span><br><span class="line">docker4w/nsenter-dockerdlatest  cae870735e91</span><br><span class="line"><span class="number">4</span> months ago187kB</span><br><span class="line">registry.cn-hangzhou.aliyuncs.com/diligentyang/centos6<span class="number">.7</span>_nginx_1<span class="number">.10</span>_php5<span class="number">.6</span><span class="number">.29</span>   v1<span class="number">.0072258802250</span></span><br><span class="line"><span class="number">14</span> months ago   <span class="number">854</span>MB</span><br></pre></td></tr></table></figure></p>
+<p>关于镜像可以使用命令：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search centos</span><br></pre></td></tr></table></figure>
+<p>来查找与centos相关的镜像<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    PS C:\WINDOWS\system32&gt; docker search centos</span><br><span class="line">    NAME   DESCRIPTION STARS   OFFICIAL</span><br><span class="line">       AUTOMATED</span><br><span class="line">    centos The official build of CentOS.   <span class="number">4079</span>[OK]</span><br><span class="line">    </span><br><span class="line">    ansible/centos7-ansibleAnsible on Centos7  <span class="number">105</span></span><br><span class="line">···</span><br><span class="line">其中越靠前是STARS越多，相当于使用的人最多，当我们选择了一个镜像后查看它的AUTOMATED就能直接拉取镜像</span><br><span class="line">```php</span><br><span class="line">    docker pull registry.cn-hangzhou.aliyuncs.com/diligentyang/centos6<span class="number">.7</span>_nginx_1<span class="number">.10</span>_php5<span class="number">.6</span><span class="number">.29</span>:v1<span class="number">.0</span></span><br></pre></td></tr></table></figure></p>
+<p>这里使用的是一个阿里云搭建的php5.6+nginx1.10的镜像<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -p <span class="number">80</span>:<span class="number">80</span> --name ali -it <span class="number">5</span>a7e /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>docker run ：创建一个新的容器并运行一个命令，常用参数:<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- -i: 以交互模式运行容器，通常与 -t 同时使用；</span><br><span class="line">- -t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用</span><br><span class="line">- –name=”nginx-lb”: 为容器指定一个名称；</span><br><span class="line">- -P 将容器的<span class="number">80</span>端口映射到主机随机端口。</span><br><span class="line">- -p <span class="number">80</span>:<span class="number">80</span> 将容器的<span class="number">80</span>端口映射到主机的<span class="number">80</span>端口</span><br><span class="line">- -v 映射主机目录和容器目录</span><br></pre></td></tr></table></figure></p>
 <p>其中 5a7e为镜像的IMAGE ID</p>
-<p>如果出现报错的情况：</p>
-<pre><code>$ docker run -p 80:80 --name ali -it 5a7e /bin/bash
-cannot enable tty mode on non tty input
-</code></pre><p>总结出两条解决方案</p>
+<p>如果出现报错的情况：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -p <span class="number">80</span>:<span class="number">80</span> --name ali -it <span class="number">5</span>a7e /bin/bash</span><br><span class="line">cannot enable tty mode on non tty input</span><br></pre></td></tr></table></figure></p>
+<p>总结出两条解决方案</p>
 <p>1: 在命令前面加上winpty<br>2: 首先执行 docker-machine ssh default</p>
-<p>不出意外的话就能直接进入到镜像了</p>
-<pre><code>[root@ec600fcf672e /]# ls
-bin   dev  home  lib64  lost+found  mnt   opt   root  selinux  sys  usr
-boot  etc  lib   local  media   mysql-community-release-el7-5.noarch.rpm  proc  sbin  srv  tmp  var
-</code></pre><p>该镜像已经配置好了php环境，所以我们只需要：</p>
-<pre><code>[root@ec600fcf672e /]# php-fpm
-[root@ec600fcf672e /]# service nginx
-</code></pre><p>就能启动了</p>
+<p>不出意外的话就能直接进入到镜像了<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ec600fcf672e /]<span class="comment"># ls</span></span><br><span class="line">bin   dev  home  lib64  lost+found  mnt   opt   root  selinux  sys  usr</span><br><span class="line">boot  etc  lib   local  media   mysql-community-release-el7<span class="number">-5.</span>noarch.rpm  proc  sbin  srv  tmp  <span class="keyword">var</span></span><br></pre></td></tr></table></figure></p>
+<p>该镜像已经配置好了php环境，所以我们只需要：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@ec600fcf672e /]<span class="comment"># php-fpm</span></span><br><span class="line">[root@ec600fcf672e /]<span class="comment"># service nginx</span></span><br></pre></td></tr></table></figure></p>
+<p>就能启动了</p>
 <p>在浏览器地址栏输入localhost 或者你的内网ip如果出现phpinfo的相关信息就说明启动成功。</p>
 <p>其中网站根目录为  /var/www</p>
 <p>如果想退出这个容器（在后台运行）需要按下ctrl+p ctrl+q （偶尔会失效。。）</p>
 <p>如果想要切回去继续工作只需要docker attach 容器id（可以为前几位，只要和别的区分开就好）</p>
-<p>查看所有容器：</p>
-<pre><code>PS C:\WINDOWS\system32&gt; docker ps -a
-CONTAINER IDIMAGE   COMMAND CREATED STATUS   PORTS
-  NAMES
-ec600fcf672e0722&quot;/bin/bash&quot; About an hour ago   Up About an hour 0.0.0.0:80-&gt;8
-tcp   ali
-fe985915775ecentos  &quot;ls&quot;6 hours ago Exited (0) 6 hours ago
-</code></pre><p>删除不用的容器</p>
+<p>查看所有容器：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PS C:\WINDOWS\system32&gt; docker ps -a</span><br><span class="line">CONTAINER IDIMAGE   COMMAND CREATED STATUS   PORTS</span><br><span class="line">  NAMES</span><br><span class="line">ec600fcf672e0722<span class="string">"/bin/bash"</span> About an hour ago   Up About an hour <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">80</span>-&gt;<span class="number">8</span></span><br><span class="line">tcp   ali</span><br><span class="line">fe985915775ecentos  <span class="string">"ls"</span><span class="number">6</span> hours ago Exited (<span class="number">0</span>) <span class="number">6</span> hours ago</span><br></pre></td></tr></table></figure></p>
+<p>删除不用的容器</p>
 <p>docker rm 容器id</p>
 <p>如果容器正在运行可以使用docker stop 容器id，关闭容器后再删除。或者直接使用docker rm -f 容器id</p>
 <p>删除镜像</p>
 <p>docker rmi 镜像id</p>
 <p>那么如何将本地目录映射到容器里进行调试呢</p>
-<p>可以在启动容器的加上一个-v参数，映射主机目录和容器目录</p>
-<pre><code>docker run -p 80:80 --name test -v /e/wamp/www:/var/www -it ec60 /bin/bash
-</code></pre><p>由于我们之前已经配置并启动了镜像，那么我们可以将本地的项目拷贝到容器里：</p>
-<pre><code>$ docker cp /e/wamp/www/test ec60:/var/www
-</code></pre><p>注意项目的路径写法。</p>
+<p>可以在启动容器的加上一个-v参数，映射主机目录和容器目录<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p <span class="number">80</span>:<span class="number">80</span> --name test -v /e/wamp/www:/<span class="keyword">var</span>/www -it ec60 /bin/bash</span><br></pre></td></tr></table></figure></p>
+<p>由于我们之前已经配置并启动了镜像，那么我们可以将本地的项目拷贝到容器里：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker cp /e/wamp/www/test ec60:/<span class="keyword">var</span>/www</span><br></pre></td></tr></table></figure></p>
+<p>注意项目的路径写法。</p>
 
     </div>
 
@@ -291,13 +234,13 @@ fe985915775ecentos  &quot;ls&quot;6 hours ago Exited (0) 6 hours ago
         
         
     <div class="widget">    
-        <h3 class="title">搜尋</h3>
+        <h3 class="title">搜索</h3>
         <div id="search-form">
             <div id="result-mask" class="hide"></div>
             <div class="search-area">
                 
                     <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
-                    <button type="button" class="search-form-submit" id="search-local">站內搜索</button>
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
                 
                 
             </div>
@@ -356,7 +299,7 @@ fe985915775ecentos  &quot;ls&quot;6 hours ago Exited (0) 6 hours ago
         
         <!--
     <div class="widget">
-        <h3 class="title">分類</h3>
+        <h3 class="title">分类</h3>
         <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/"><i class="fa" aria-hidden="true">Mysql</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/"><i class="fa" aria-hidden="true">PHP</i></a><span class="category-list-count">9</span></li></ul>
     </div>
 -->
@@ -364,15 +307,15 @@ fe985915775ecentos  &quot;ls&quot;6 hours ago Exited (0) 6 hours ago
         
         
     <div class="widget">
-      <h3 class="title">彙整</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">March 2018</i></a><span class="archive-list-count">15</span></li></ul>
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">15</span></li></ul>
     </div>
 
 
         
         
   <div class="widget">
-    <h3 class="title">標籤雲</h3>
+    <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
         <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/UEditor/" style="font-size: 10px;">UEditor</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/debugbar/" style="font-size: 10px;">debugbar</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/tp/" style="font-size: 10px;">tp</a> <a href="/tags/上传/" style="font-size: 10px;">上传</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/模板继承/" style="font-size: 10px;">模板继承</a> <a href="/tags/登陆验证/" style="font-size: 10px;">登陆验证</a> <a href="/tags/表单验证/" style="font-size: 10px;">表单验证</a> <a href="/tags/递归-php/" style="font-size: 10px;">递归 php</a>
     </div>
@@ -382,7 +325,7 @@ fe985915775ecentos  &quot;ls&quot;6 hours ago Exited (0) 6 hours ago
         
         
     <div class="widget">
-        <h3 class="title">友鏈</h3>
+        <h3 class="title">友链</h3>
         <div class="content friends-link">
         
             <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
@@ -415,7 +358,7 @@ fe985915775ecentos  &quot;ls&quot;6 hours ago Exited (0) 6 hours ago
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
-                <span>Copyright &copy; 2017
+                <span>Copyright &copy; 2018
                 </span> | 
                 <span>
                     Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="">
+<html lang="zh-CN">
 <head>
     <!--Setting-->
     <meta charset="UTF-8">
@@ -13,10 +13,14 @@
     <meta name="format-detection" content="telephone=no,email=no,adress=no">
     <meta name="browsermode" content="application">
     <meta name="screen-orientation" content="portrait">
-    <link rel="dns-prefetch" href="http://yoursite.com">
+    <link rel="dns-prefetch" href="http://imcsi.cn">
     <!--SEO-->
 
+<meta name="description" content="陈思的个人博客,记录个人的学习心得以及分享一些技术,包括thinkphp，laravel等相关框架"/>
 
+
+
+<meta name="keywords" content="博客,个人博客,imcsi,陈思,陈思个人博客,imcsi.cn,php博客,phper心得,php个人博客,laravel博客"/>
 
 
 
@@ -157,12 +161,10 @@
     
     <div class="post-body post-content">
         <p>当在Linux服务器上搭建了LNMP环境后，在服务器端本地可以访问，但是有时候需要本地先创建数据表再上传到服务器，而Linux下Mysql默认安装完成后只有本地访问的权限，需要指定用户设置访问权限才能远程访问该数据库。</p>
-<p>首先登陆数据库：</p>
-<pre><code>mysql -U root -p
-</code></pre><p>输入数据库密码</p>
-<p>然后运行以下sql语句：</p>
-<pre><code>grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; identified by &apos;root&apos;;
-</code></pre><p>前面的root代表远程登陆时的用户名，后面的root代表密码，这样设置的是账号为root密码也为root的mysql用户，中间的’%’表示所有ip地址都能远程访问，如果要针对一台机器访问，将‘%’改为对应的ip地址即可访问数据库。</p>
+<p>首先登陆数据库：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -U root -p</span><br></pre></td></tr></table></figure></p>
+<p>输入数据库密码</p>
+<p>然后运行以下sql语句：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant all privileges on *.* to <span class="string">'root'</span>@<span class="string">'%'</span> identified by <span class="string">'root'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>前面的root代表远程登陆时的用户名，后面的root代表密码，这样设置的是账号为root密码也为root的mysql用户，中间的’%’表示所有ip地址都能远程访问，如果要针对一台机器访问，将‘%’改为对应的ip地址即可访问数据库。</p>
 <p>特别提醒不要讲账号密码设置成简单的组合，不然容易被黑。当我按照以上的操作成功远程登陆，过了几天以后。。。。<br>自己创建的数据库不见了，取而代之的是一个名为 “WARNING”的数据库，其中只有一张名为Readme的表，wtf？打开后是一条数据，大致内容是这样的：</p>
 <pre><code>Your Data is downloaded and backed up on our secured servers. To recover your lost data: Send 0.1 BTC to our BitCoin Address and Contact us by eMail with your server IP Address and a Proof of Payment. Any eMail without your server IP Address and a Proof of Payment together will be ignored. You are welcome
 </code></pre><p>翻译后是这样的：</p>
@@ -208,13 +210,13 @@
         
         
     <div class="widget">    
-        <h3 class="title">搜尋</h3>
+        <h3 class="title">搜索</h3>
         <div id="search-form">
             <div id="result-mask" class="hide"></div>
             <div class="search-area">
                 
                     <input id="search-key" type="search" autocomplete="off" placeholder="搜点什么呢?">
-                    <button type="button" class="search-form-submit" id="search-local">站內搜索</button>
+                    <button type="button" class="search-form-submit" id="search-local">站内搜索</button>
                 
                 
             </div>
@@ -273,7 +275,7 @@
         
         <!--
     <div class="widget">
-        <h3 class="title">分類</h3>
+        <h3 class="title">分类</h3>
         <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/"><i class="fa" aria-hidden="true">Linux</i></a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mysql/"><i class="fa" aria-hidden="true">Mysql</i></a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/PHP/"><i class="fa" aria-hidden="true">PHP</i></a><span class="category-list-count">9</span></li></ul>
     </div>
 -->
@@ -281,15 +283,15 @@
         
         
     <div class="widget">
-      <h3 class="title">彙整</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">March 2018</i></a><span class="archive-list-count">15</span></li></ul>
+      <h3 class="title">归档</h3>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">15</span></li></ul>
     </div>
 
 
         
         
   <div class="widget">
-    <h3 class="title">標籤雲</h3>
+    <h3 class="title">标签云</h3>
     <div class="content tag-cloud">
         <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/UEditor/" style="font-size: 10px;">UEditor</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/cache/" style="font-size: 10px;">cache</a> <a href="/tags/debugbar/" style="font-size: 10px;">debugbar</a> <a href="/tags/https/" style="font-size: 10px;">https</a> <a href="/tags/laravel/" style="font-size: 20px;">laravel</a> <a href="/tags/mysql/" style="font-size: 16.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 13.33px;">php</a> <a href="/tags/tp/" style="font-size: 10px;">tp</a> <a href="/tags/上传/" style="font-size: 10px;">上传</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/模板继承/" style="font-size: 10px;">模板继承</a> <a href="/tags/登陆验证/" style="font-size: 10px;">登陆验证</a> <a href="/tags/表单验证/" style="font-size: 10px;">表单验证</a> <a href="/tags/递归-php/" style="font-size: 10px;">递归 php</a>
     </div>
@@ -299,7 +301,7 @@
         
         
     <div class="widget">
-        <h3 class="title">友鏈</h3>
+        <h3 class="title">友链</h3>
         <div class="content friends-link">
         
             <a href="http://www.shenliyang.com" class="fa" target="_blank">个人博客</a>
@@ -332,7 +334,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12"> 
-                <span>Copyright &copy; 2017
+                <span>Copyright &copy; 2018
                 </span> | 
                 <span>
                     Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
