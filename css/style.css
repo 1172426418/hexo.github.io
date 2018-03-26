@@ -863,6 +863,7 @@ pre {
   transition: all 0.2s;
       border-radius: 6px;
 }
+
 .widget .tag-cloud a:hover {
   color: #fff;
   background: #e67e22;
@@ -875,16 +876,31 @@ pre {
   width: 40px;
   height: 40px;
   line-height: 45px;
-  color: #fff;
-  background: #808080;
+  
+/*    color: #fff; */
+ /* background: #808080; */
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   margin-right: 10px;
   margin-bottom: 10px;
 }
+.fa-github{
+	color:#55acee;
+}
+.fa-weibo{
+	color:#ff763b;
+}
+.fa-rss{
+	color:#db4437;
+}
 .widget .social a:hover {
-  background: #e67e22;
+/*   color: #17bebb; */
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.content .social a:hover {
+  color: #17bebb;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
@@ -892,7 +908,10 @@ pre {
   margin-right: 0px;
 }
 .widget .social a i {
-  font-size: 20px;
+  font-size: 30px;
+}
+.widget .social a i:hover{
+  color: #17bebb; 
 }
 .widget .friends-link a {
   margin-right: 15px;
