@@ -31,7 +31,7 @@
     <!--Title-->
 
 
-<title>分类: Mysql | IMCSI</title>
+<title>标签: 递归 | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -127,10 +127,16 @@
 
 <article class="post">
     
+        <div class="post-media">
+            <a href="/2018/03/23/PHP无极分类递归方法实现/">
+                <img class="img-ajax" src="/img/loading.gif"  data-src="https://i.imgur.com/UAcpdqu.png"   alt="PHP无极分类递归方法实现"> 
+            </a>
+        </div>
+    
     <div class="post-content">
         <div class="post-head home-post-head">
             <h1 class="post-title">
-                <a href="/2018/03/23/Mysql相关小技巧总结在这里/">Mysql相关小技巧总结在这里</a>
+                <a href="/2018/03/23/PHP无极分类递归方法实现/">PHP无极分类递归方法实现</a>
             </h1>
             <div class="post-meta">  &bull;
                 <time class="post-date" datetime="" title="">
@@ -140,8 +146,10 @@
         </div>
         <p class="brief">
             
-                1.Mysql触发器
-适用案例，删除订单同时删除订单详情：1234CREATE TRIGGER del_orderdetails AFTER DELETE ON ms_order FOR EACH ROWBEGINDELETE FRO...
+                在做权限相关模块的功能，我们需要给不同的用户指定不同功能权限。
+首先我们需要一张分类的表格。类似于这样：
+
+其中category_id表示的是分类id，category_name表示的是分类名，pid代表的就是父级分类id，我们可以将...
             
         </p> 
     </div>
@@ -150,16 +158,13 @@
             <div class="post-meta">
     
     
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            <a href="/tags/mysql">
-               mysql
-            </a>
-            
-        </span>
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/PHP">
+            PHP
+        </a>
     </span>
+    
     
     
     <span class="fa-wrap">
@@ -171,64 +176,10 @@
         </div>
 
         <div class="post-permalink"> 
-            <a href="/2018/03/23/Mysql相关小技巧总结在这里/" class="btn btn-default">阅读全文</a>
+            <a href="/2018/03/23/PHP无极分类递归方法实现/" class="btn btn-default">阅读全文</a>
         </div>
     </footer>
 </article>
-
-
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2018/03/23/Linux下MYSQL开启远程访问权限/">Linux下MYSQL开启远程访问权限</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年03月23日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            
-                当在Linux服务器上搭建了LNMP环境后，在服务器端本地可以访问，但是有时候需要本地先创建数据表再上传到服务器，而Linux下Mysql默认安装完成后只有本地访问的权限，需要指定用户设置访问权限才能远程访问该数据库。
-首先登陆数据库...
-            
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            <a href="/tags/mysql">
-               mysql
-            </a>
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/03/23</span>
-    </span>
-</div>
-
-        </div>
-
-        <div class="post-permalink"> 
-            <a href="/2018/03/23/Linux下MYSQL开启远程访问权限/" class="btn btn-default">阅读全文</a>
-        </div>
-    </footer>
-</article>
-
-
 
 
 
