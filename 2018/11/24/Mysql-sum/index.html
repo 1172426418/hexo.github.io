@@ -32,7 +32,7 @@
     <!--Title-->
 
 
-<title>标签: ajax | IMCSI</title>
+<title>Mysql相关小技巧总结在这里 | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -131,61 +131,90 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    
-
-
-
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
 <article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2018/03/23/Laravel-ajax-temp-check-middleware/">Laravel使用（ajax,模板继承,登陆验证,中间件）</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年03月23日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
+    <div class="post-head">
+        <h1 id="Mysql相关小技巧总结在这里">
             
-                1.ajax使用ajax传递数据必须带上_token字段:123456789101112$.ajax(&amp;#123;type:&#39;post&#39;,url:&#34;&amp;#123;&amp;#123; url(&#39;admin/login/login&#39;)&amp;#125;...
+	            Mysql相关小技巧总结在这里
             
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
+        </h1>
+        <div class="post-meta">
     
     
     <span class="categories-meta fa-wrap">
         <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/PHP">
-            PHP
+        <a href="/categories/Mysql">
+            Mysql
         </a>
     </span>
     
     
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
+            <a href="/tags/mysql">
+               mysql
+            </a>
+            
+        </span>
+    </span>
+    
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/03/23</span>
+        <span class="date-meta">2018/11/24</span>
     </span>
 </div>
 
-        </div>
+            
+            
+    </div>
+    
+    <div class="post-body post-content">
+        <p>1.Mysql触发器</p>
+<p>适用案例，删除订单同时删除订单详情：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER del_orderdetails AFTER DELETE ON ms_order <span class="keyword">FOR</span> EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">DELETE FROM ms_order_details WHERE user_id=old.id;</span><br><span class="line">END</span><br></pre></td></tr></table></figure></p>
+<p>del_orderdetails：触发器的名称 AFTER：触发时机，为BEFORE或者AFTER DELETE：触发事件，为INSERT、DELETE或者UPDATE ms_order：表示建立触发器的表明，就是在哪张表上建立触发器</p>
+<p>2.不同库之间的表关联查询<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from db1.table1 left join db2.table2 on db1.table1.id = db2.table2.id</span><br></pre></td></tr></table></figure></p>
+<p>只需要在表前面带上库的名称加上然后在后面加上 ‘.’ 表名</p>
+<p>3.查询指定表是否存在<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT count(<span class="number">0</span>) FROM information_schema.TABLES WHERE table_schema=<span class="string">'gzjs'</span> <span class="keyword">and</span> table_name=<span class="string">'user'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是一定要带上table_schema来判断是哪个库，不然将会在所有的数据库来检索目标数据表</p>
+<p>4.查找id为奇数（偶数）的行<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from table where id&amp;<span class="number">1</span> ;<span class="comment">//奇数</span></span><br><span class="line"></span><br><span class="line">select * from table where id=(id&gt;&gt;<span class="number">1</span>)&lt;&lt;<span class="number">1</span> ;<span class="comment">//偶数</span></span><br></pre></td></tr></table></figure></p>
 
-        <div class="post-permalink"> 
-            <a href="/2018/03/23/Laravel-ajax-temp-check-middleware/" class="btn btn-default">阅读全文</a>
+    </div>
+
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="#" target="_blank">imcsi</a>
+            
         </div>
-    </footer>
+        <div>
+            
+        </div>  
+    </div>
 </article>
 
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/11/24/Laravel-prestrain/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
 
 
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytFa2SQc';var conf='0292ab53f953f1d1e4fd48c6ec90f7b7';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
 
+    </div>
 
 
 
