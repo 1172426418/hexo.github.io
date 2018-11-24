@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://imcsi.cn/"/>
-  <updated>2018-11-24T03:02:14.595Z</updated>
+  <updated>2018-11-24T03:56:47.678Z</updated>
   <id>https://imcsi.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>php算法之二分查找</title>
+    <link href="https://imcsi.cn/2018/11/24/phpalgorithm-erfen/"/>
+    <id>https://imcsi.cn/2018/11/24/phpalgorithm-erfen/</id>
+    <published>2018-11-24T06:42:47.000Z</published>
+    <updated>2018-11-24T03:56:47.678Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>首先是二分查找算法的前提：</strong></p><p>1.必须是索引数组，即键为数字</p><p>2.必须是已经排好序的数字，即键从小到大或者从大到小排序<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bin_sch</span><span class="params">($array,  $low, $high, $k)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span> ( $low &lt;= $high)&#123;<span class="comment">//判断开始点是否小于等于终点</span></span><br><span class="line">    $mid =  intval(($low+$high)/<span class="number">2</span> );<span class="comment">//向下取中点值</span></span><br><span class="line">    <span class="keyword">if</span> ($array[$mid] ==  $k)&#123;<span class="comment">//如果刚好等于中点值则返回</span></span><br><span class="line">        <span class="keyword">return</span> $mid;</span><br><span class="line">    &#125;<span class="keyword">elseif</span> ( $k &lt; $array[$mid])&#123;<span class="comment">//若目标值小于中点值则从起点值到中点值-1范围内继续递归查找直到找到目标值的下标</span></span><br><span class="line">        <span class="keyword">return</span>  bin_sch($array, $low,  $mid<span class="number">-1</span>, $k);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;<span class="comment">//若目标值大于中点值则从中点值+1到查找终点范围内继续递归查找直到找到目标值的下标</span></span><br><span class="line">        <span class="keyword">return</span>  bin_sch($array, $mid+ <span class="number">1</span>, $high, $k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>$array是目标数组,$low为查找起点,$high为查找终点，$k为目标值</p><p>比如在100里面找到23的位置<br>首先将100/2得到两边为大于50和小于50的两部分，再判断23是小于50，就继续在小于50的范围查，继续将50/2再与23进行比较，直到等于23取其位置（键）即可。</p><p>因为二分查找是将目标数一直除以2进行查找，取目标数要在最后一次查找才能找出，那么有关二分法查找算法的效率（性能）问题的一点说明：</p><p>　　1000个数据，约10次找出；2的10次方等于1024</p><p>　　100万个数据，约20次找出；2的20次方等于1048576</p><p>　　10亿个数据，约30次找出；</p><p>　　40亿个数据，约32次找出。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;首先是二分查找算法的前提：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1.必须是索引数组，即键为数字&lt;/p&gt;
+&lt;p&gt;2.必须是已经排好序的数字，即键从小到大或者从大到小排序&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+      
+    
+    </summary>
+    
+      <category term="PHP" scheme="https://imcsi.cn/categories/PHP/"/>
+    
+    
+      <category term="算法" scheme="https://imcsi.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>Mysql相关小技巧总结在这里</title>
@@ -555,31 +582,6 @@
       <category term="nginx" scheme="https://imcsi.cn/tags/nginx/"/>
     
       <category term="php" scheme="https://imcsi.cn/tags/php/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Centos7 配置https协议</title>
-    <link href="https://imcsi.cn/2018/03/23/Centos7-https/"/>
-    <id>https://imcsi.cn/2018/03/23/Centos7-https/</id>
-    <published>2018-03-23T06:20:03.000Z</published>
-    <updated>2018-03-26T03:14:56.281Z</updated>
-    
-    <content type="html"><![CDATA[<p>本文用的是Let’s Encrypt数字证书认证机构免费提供的ssl证书。letsencrypt基于ACME协议自助颁发证书的过程由letsencrypt提供一个工具完成，工具名称现在叫做：certbot，在linux下certbot工具安装后也就是certbot命令。</p><p>1,.安装certbot用于生成证书<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##安装epel-release扩展包</span></span><br><span class="line">yum install epel-release</span><br><span class="line"><span class="comment">##更新yum缓存</span></span><br><span class="line">yum makecache</span><br><span class="line"><span class="comment">##直接yum安装certbot</span></span><br><span class="line">yum install certbot</span><br></pre></td></tr></table></figure></p><p>2.使用certbot申请Let’s Encrypt免费的ssl证书</p><p>配置Let’s Encrypt有两种模式，standalone和webroot。至于两种模式的区别可自行百度一下。我们这里使用的是webroot模式。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##--webroot指定你的网站的根目录</span></span><br><span class="line">certbot certonly --webroot -w /<span class="keyword">var</span>/www/blog -d blog.ibeeasy.cn</span><br></pre></td></tr></table></figure></p><p>对于nginx而言web根目录下的隐藏目录默认情况下是不允许访问的，所以nginx情况下再执行非standalone模式申请ssl证书之前，需要将nginx网站根目录下的.well-known隐藏目录设置成允许访问。</p><p>申请过程中可能会需要输入邮箱接受通知，还有一个同意协议的选项，选y。</p><p>不出意外的话，证书文件会在以下的位置：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/letsencrypt/live/你的域名/</span><br></pre></td></tr></table></figure></p><p>3.配置nginx</p><p>以前我们使用的是80（http）端口，而https协议是443端口，所以我们要将80端口转发到443端口，在你当前网站的配置文件里修改配置如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">listen <span class="number">80</span>;</span><br><span class="line">server_name blog.ibeeasy.cn;</span><br><span class="line">rewrite ^(.*) https:<span class="comment">//$server_name$1 permanent; </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">listen <span class="number">443</span> ssl http2;</span><br><span class="line">server_name  blog.ibeeasy.cn;</span><br><span class="line">   <span class="comment">#告诉浏览器当前页面禁止被frame</span></span><br><span class="line">add_header X-Frame-Options DENY;</span><br><span class="line"><span class="comment">#告诉浏览器不要猜测mime类型</span></span><br><span class="line">add_header X-Content-Type-Options nosniff;</span><br><span class="line"><span class="comment">#证书路径</span></span><br><span class="line">ssl_certificate /etc/letsencrypt/live/blog.ibeeasy.cn/fullchain.pem;</span><br><span class="line"><span class="comment">#私钥路径</span></span><br><span class="line">ssl_certificate_key /etc/letsencrypt/live/blog.ibeeasy.cn/privkey.pem;</span><br><span class="line"><span class="comment">#安全链接可选的加密协议</span></span><br><span class="line">ssl_protocols TLSv1 TLSv1<span class="number">.1</span> TLSv1<span class="number">.2</span>;</span><br><span class="line"><span class="comment">#可选的加密算法,顺序很重要,越靠前的优先级越高.</span></span><br><span class="line">ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-RC4-SHA:!ECDHE-RSA-RC4-SHA:ECDH-ECDSA-RC4-SHA:ECDH-RSA-RC4-SHA:ECDHE-RSA-AES256-SHA:HIGH:!RC4-SHA:!aNULL:!eNULL:!LOW:!<span class="number">3</span>DES:!MD5:!EXP:!CBC:!EDH:!kEDH:!PSK:!SRP:!kECDH;</span><br><span class="line"><span class="comment">#在 SSLv3 或 TLSv1 握手过程一般使用客户端的首选算法,如果启用下面的配置,则会使用服务器端的首选算法.</span></span><br><span class="line">ssl_prefer_server_ciphers on;</span><br><span class="line"><span class="comment">#储存SSL会话的缓存类型和大小</span></span><br><span class="line">ssl_session_cache shared:SSL:<span class="number">10</span>m;</span><br><span class="line"><span class="comment">#缓存有效期</span></span><br><span class="line">ssl_session_timeout <span class="number">60</span>m;</span><br><span class="line">   <span class="comment">#其他配置照原先的不变，这里就不列出来了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>配置完成后重启Nginx或重新加载配置：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#或重启nginx</span></span><br><span class="line">systemctl restart nginx</span><br><span class="line"><span class="comment">#重新加载配置</span></span><br><span class="line">systemctl reload nginx</span><br></pre></td></tr></table></figure></p><p>至此，https协议就部署完成了，如果还是无法访问，请确定443端口是否开启，或者是否添加安全组443端口的入方向。</p><p>4.添加脚本执行证书更新</p><p>因为ssl证书的有效期是90天，所以我们要设置一个定时任务来自动更新证书，证书更新的命令如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./letsencrypt-auto renew</span><br></pre></td></tr></table></figure></p><p>如果要指定更新某个域名的证书, 则要使用 certonly 参数,：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./letsencrypt-auto certonly --webroot --renew-by-<span class="keyword">default</span> --email admin@ibeeasy.cn -w /<span class="keyword">var</span>/www/blog -d blog.ibeeasy.cn -d a.ibeeasy.cn</span><br></pre></td></tr></table></figure></p><p>当然，官方也提供了 cron 运行脚本的方式可以实现定时续期，脚本如下：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line"><span class="comment">#停止 nginx 服务,使用 --standalone 独立服务器验证需要停止当前 web server.</span></span><br><span class="line">systemctl stop nginx</span><br><span class="line"><span class="keyword">if</span> ! /path/to/letsencrypt-auto renew -nvv --standalone &gt; /<span class="keyword">var</span>/log/letsencrypt/renew.log <span class="number">2</span>&gt;&amp;<span class="number">1</span> ; then</span><br><span class="line"><span class="keyword">echo</span> Automated renewal failed:</span><br><span class="line">cat /<span class="keyword">var</span>/log/letsencrypt/renew.log</span><br><span class="line"><span class="keyword">exit</span> <span class="number">1</span></span><br><span class="line">fi</span><br><span class="line"><span class="comment">#启动 nginx</span></span><br><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure></p><p>将以上脚本保存为 letsencrypt-renew.sh</p><p>添加可执行权限：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x letsencrypt-renew.sh</span><br></pre></td></tr></table></figure></p><p>编辑 crontab 配置文件或执行<code>crontab -e</code> 添加 cron 任务：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nano /etc/crontab</span><br></pre></td></tr></table></figure></p><p>我这里设置为每月1号0点执行此脚本.<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#分 时 日 月 星期 执行用户 执行命令</span></span><br><span class="line"> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> *  *   root/脚本目录/letsencrypt-renew.sh</span><br></pre></td></tr></table></figure></p><p>加入后Ctrl+X保存退出即可。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;本文用的是Let’s Encrypt数字证书认证机构免费提供的ssl证书。letsencrypt基于ACME协议自助颁发证书的过程由letsencrypt提供一个工具完成，工具名称现在叫做：certbot，在linux下certbot工具安装后也就是certbot命令。&lt;/
-      
-    
-    </summary>
-    
-      <category term="Linux" scheme="https://imcsi.cn/categories/Linux/"/>
-    
-    
-      <category term="https" scheme="https://imcsi.cn/tags/https/"/>
     
   </entry>
   
