@@ -177,6 +177,11 @@
         <p>1.Mysql触发器</p>
 <p>适用案例，删除订单同时删除订单详情：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE TRIGGER del_orderdetails AFTER DELETE ON ms_order <span class="keyword">FOR</span> EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">DELETE FROM ms_order_details WHERE user_id=old.id;</span><br><span class="line">END</span><br></pre></td></tr></table></figure></p>
 <p>del_orderdetails：触发器的名称 AFTER：触发时机，为BEFORE或者AFTER DELETE：触发事件，为INSERT、DELETE或者UPDATE ms_order：表示建立触发器的表明，就是在哪张表上建立触发器</p>
+<p>2.不同库之间的表关联查询<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from db1.table1 left join db2.table2 on db1.table1.id = db2.table2.id</span><br></pre></td></tr></table></figure></p>
+<p>只需要在表前面带上库的名称加上然后在后面加上 ‘.’ 表名</p>
+<p>3.查询指定表是否存在<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT count(<span class="number">0</span>) FROM information_schema.TABLES WHERE table_schema=<span class="string">'gzjs'</span> <span class="keyword">and</span> table_name=<span class="string">'user'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是一定要带上table_schema来判断是哪个库，不然将会在所有的数据库来检索目标数据表</p>
+<p>4.查找id为奇数（偶数）的行<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from table where id&amp;<span class="number">1</span> ;<span class="comment">//奇数</span></span><br><span class="line"></span><br><span class="line">select * from table where id=(id&gt;&gt;<span class="number">1</span>)&lt;&lt;<span class="number">1</span> ;<span class="comment">//偶数</span></span><br></pre></td></tr></table></figure></p>
 
     </div>
 
@@ -293,7 +298,7 @@
         
     <div class="widget">
       <h3 class="title">归档</h3>
-        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/"><i class="fa" aria-hidden="true">九月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">14</span></li></ul>
+        <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/"><i class="fa" aria-hidden="true">十一月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/"><i class="fa" aria-hidden="true">八月 2018</i></a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/"><i class="fa" aria-hidden="true">六月 2018</i></a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/"><i class="fa" aria-hidden="true">五月 2018</i></a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/"><i class="fa" aria-hidden="true">三月 2018</i></a><span class="archive-list-count">14</span></li></ul>
     </div>
 
 
