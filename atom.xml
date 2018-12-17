@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://imcsi.cn/"/>
-  <updated>2018-11-24T07:39:07.720Z</updated>
+  <updated>2018-11-24T03:59:35.983Z</updated>
   <id>https://imcsi.cn/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>php算法之二分查找</title>
+    <link href="https://imcsi.cn/2018/11/24/phpalgorithm-erfen/"/>
+    <id>https://imcsi.cn/2018/11/24/phpalgorithm-erfen/</id>
+    <published>2018-11-24T06:42:47.000Z</published>
+    <updated>2018-11-24T03:59:35.983Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>首先是二分查找算法的前提：</strong></p><p>1.必须是索引数组，即键为数字</p><p>2.必须是已经排好序的数字，即键从小到大或者从大到小排序<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bin_sch</span><span class="params">($array,  $low, $high, $k)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span> ( $low &lt;= $high)&#123;<span class="comment">//判断开始点是否小于等于终点</span></span><br><span class="line">    $mid =  intval(($low+$high)/<span class="number">2</span> );<span class="comment">//向下取中点值</span></span><br><span class="line">    <span class="keyword">if</span> ($array[$mid] ==  $k)&#123;<span class="comment">//如果刚好等于中点值则返回</span></span><br><span class="line">        <span class="keyword">return</span> $mid;</span><br><span class="line">    &#125;<span class="keyword">elseif</span> ( $k &lt; $array[$mid])&#123;<span class="comment">//若目标值小于中点值则从起点值到中点值-1范围内继续递归查找直到找到目标值的下标</span></span><br><span class="line">        <span class="keyword">return</span>  bin_sch($array, $low,  $mid<span class="number">-1</span>, $k);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;<span class="comment">//若目标值大于中点值则从中点值+1到查找终点范围内继续递归查找直到找到目标值的下标</span></span><br><span class="line">        <span class="keyword">return</span>  bin_sch($array, $mid+ <span class="number">1</span>, $high, $k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>$array是目标数组,$low为查找起点,$high为查找终点，$k为目标值</p><p>比如在100里面找到23的位置<br>首先将100/2得到两边为大于50和小于50的两部分，再判断23是小于50，就继续在小于50的范围查，继续将50/2再与23进行比较，直到等于23取其位置（键）即可。</p><p>因为二分查找是将目标数一直除以2进行查找，取目标数要在最后一次查找才能找出，那么有关二分法查找算法的效率（性能）问题的一点说明：</p><p><strong>1000个数据，约10次找出；2的10次方等于1024</strong></p><p><strong>100万个数据，约20次找出；2的20次方等于1048576</strong></p><p><strong>10亿个数据，约30次找出；</strong>  <strong>以此类推..</strong></p><p><strong>40亿个数据，约32次找出。</strong>   <strong>..</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;首先是二分查找算法的前提：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;1.必须是索引数组，即键为数字&lt;/p&gt;
+&lt;p&gt;2.必须是已经排好序的数字，即键从小到大或者从大到小排序&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+      
+    
+    </summary>
+    
+      <category term="PHP" scheme="https://imcsi.cn/categories/PHP/"/>
+    
+    
+      <category term="算法" scheme="https://imcsi.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>php基础算法</title>
@@ -65,33 +92,6 @@
     
     
       <category term="mysql" scheme="https://imcsi.cn/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>php算法之二分查找</title>
-    <link href="https://imcsi.cn/2018/11/24/phpalgorithm-erfen/"/>
-    <id>https://imcsi.cn/2018/11/24/phpalgorithm-erfen/</id>
-    <published>2018-11-24T06:42:47.000Z</published>
-    <updated>2018-11-24T03:59:35.983Z</updated>
-    
-    <content type="html"><![CDATA[<p><strong>首先是二分查找算法的前提：</strong></p><p>1.必须是索引数组，即键为数字</p><p>2.必须是已经排好序的数字，即键从小到大或者从大到小排序<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bin_sch</span><span class="params">($array,  $low, $high, $k)</span></span>&#123;</span><br><span class="line"><span class="keyword">if</span> ( $low &lt;= $high)&#123;<span class="comment">//判断开始点是否小于等于终点</span></span><br><span class="line">    $mid =  intval(($low+$high)/<span class="number">2</span> );<span class="comment">//向下取中点值</span></span><br><span class="line">    <span class="keyword">if</span> ($array[$mid] ==  $k)&#123;<span class="comment">//如果刚好等于中点值则返回</span></span><br><span class="line">        <span class="keyword">return</span> $mid;</span><br><span class="line">    &#125;<span class="keyword">elseif</span> ( $k &lt; $array[$mid])&#123;<span class="comment">//若目标值小于中点值则从起点值到中点值-1范围内继续递归查找直到找到目标值的下标</span></span><br><span class="line">        <span class="keyword">return</span>  bin_sch($array, $low,  $mid<span class="number">-1</span>, $k);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;<span class="comment">//若目标值大于中点值则从中点值+1到查找终点范围内继续递归查找直到找到目标值的下标</span></span><br><span class="line">        <span class="keyword">return</span>  bin_sch($array, $mid+ <span class="number">1</span>, $high, $k);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>$array是目标数组,$low为查找起点,$high为查找终点，$k为目标值</p><p>比如在100里面找到23的位置<br>首先将100/2得到两边为大于50和小于50的两部分，再判断23是小于50，就继续在小于50的范围查，继续将50/2再与23进行比较，直到等于23取其位置（键）即可。</p><p>因为二分查找是将目标数一直除以2进行查找，取目标数要在最后一次查找才能找出，那么有关二分法查找算法的效率（性能）问题的一点说明：</p><p><strong>1000个数据，约10次找出；2的10次方等于1024</strong></p><p><strong>100万个数据，约20次找出；2的20次方等于1048576</strong></p><p><strong>10亿个数据，约30次找出；</strong>  <strong>以此类推..</strong></p><p><strong>40亿个数据，约32次找出。</strong>   <strong>..</strong></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;strong&gt;首先是二分查找算法的前提：&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;1.必须是索引数组，即键为数字&lt;/p&gt;
-&lt;p&gt;2.必须是已经排好序的数字，即键从小到大或者从大到小排序&lt;br&gt;&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
-      
-    
-    </summary>
-    
-      <category term="PHP" scheme="https://imcsi.cn/categories/PHP/"/>
-    
-    
-      <category term="算法" scheme="https://imcsi.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
