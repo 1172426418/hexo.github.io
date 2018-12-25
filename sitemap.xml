@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://imcsi.cn/2018/08/23/php-bitwise/</loc>
+    
+    <lastmod>2018-12-25T08:01:46.774Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://imcsi.cn/2018/11/24/php-basicsort/</loc>
     
     <lastmod>2018-11-24T07:39:07.720Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://imcsi.cn/timeline/index.html</loc>
     
     <lastmod>2018-09-19T12:54:51.910Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://imcsi.cn/2018/08/23/php-bitwise/</loc>
-    
-    <lastmod>2018-08-23T12:38:56.898Z</lastmod>
     
   </url>
   
