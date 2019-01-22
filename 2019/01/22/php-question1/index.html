@@ -32,7 +32,7 @@
     <!--Title-->
 
 
-<title>分类: Mysql | IMCSI</title>
+<title>php只出现一次的数字问题 | IMCSI</title>
 
 
     <link rel="alternate" href="/atom.xml" title="IMCSI" type="application/atom+xml">
@@ -131,42 +131,32 @@
     <section class="content-wrap">
         <div class="container">
             <div class="row">
-                <main class="col-md-8 main-content ">
-                    
-
-
-
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
 <article class="post">
+    <div class="post-head">
+        <h1 id="php只出现一次的数字问题">
+            
+	            php只出现一次的数字问题
+            
+        </h1>
+        <div class="post-meta">
     
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2018/11/24/Mysql-sum/">Mysql相关小技巧总结在这里</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年11月24日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
-            
-                1.Mysql触发器
-适用案例，删除订单同时删除订单详情：1234CREATE TRIGGER del_orderdetails AFTER DELETE ON ms_order FOR EACH ROWBEGINDELETE FRO...
-            
-        </p> 
-    </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/PHP">
+            PHP
+        </a>
+    </span>
     
     
     <span class="fa-wrap">
         <i class="fa fa-tags"></i>
         <span class="tags-meta">
             
-            <a href="/tags/mysql">
-               mysql
+            <a href="/tags/算法">
+               算法
             </a>
             
         </span>
@@ -175,75 +165,64 @@
     
     <span class="fa-wrap">
         <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/11/24</span>
+        <span class="date-meta">2019/01/22</span>
     </span>
 </div>
 
-        </div>
-
-        <div class="post-permalink"> 
-            <a href="/2018/11/24/Mysql-sum/" class="btn btn-default">阅读全文</a>
-        </div>
-    </footer>
-</article>
-
-
-<article class="post">
-    
-    <div class="post-content">
-        <div class="post-head home-post-head">
-            <h1 class="post-title">
-                <a href="/2018/03/23/Linux-mysql-remote/">Linux下MYSQL开启远程访问权限</a>
-            </h1>
-            <div class="post-meta">  &bull;
-                <time class="post-date" datetime="" title="">
-                    2018年03月23日
-                </time>
-            </div>
-        </div>
-        <p class="brief">
             
-                当在Linux服务器上搭建了LNMP环境后，在服务器端本地可以访问，但是有时候需要本地先创建数据表再上传到服务器，而Linux下Mysql默认安装完成后只有本地访问的权限，需要指定用户设置访问权限才能远程访问该数据库。
-首先登陆数据库...
             
-        </p> 
     </div>
-    <footer class="post-footer clearfix">
-        <div class="pull-left tag-list">
-            <div class="post-meta">
     
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-            <a href="/tags/mysql">
-               mysql
-            </a>
-            
-        </span>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-clock-o"></i>
-        <span class="date-meta">2018/03/23</span>
-    </span>
-</div>
+    <div class="post-body post-content">
+        <p><strong>题目描述</strong></p>
+<p>给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
+<p>说明：<br>你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
+<p>示例 1:<br>输入: [2,2,1]<br>输出: 1</p>
+<p>示例 2:<br>输入: [4,1,2,1,2]<br>输出: 4</p>
+<p>题目解析</p>
+<p>根据题目描述，由于加上了时间复杂度必须是 O(n)，并且空间复杂度为 O(1)的条件，因此不能用排序方法，也不能使用 map 数据结构。那么可以使用位操作的特性来解这个题。</p>
+<p>由异或运算的性质（相同为0，不同为1），那么出现两次的元素经过异或运算结果为0，那么数组中所有元素异或运算的结果就是剩下的唯一一个值了。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$arr=<span class="keyword">array</span>(<span class="number">9</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">4</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_bin</span><span class="params">($a,$b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> $a^$b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> array_reduce($arr,<span class="string">'get_bin'</span>,<span class="number">0</span>);<span class="comment">//将数组中所有的值用回调函数进行迭代，获得的结果即是剩下的唯一值</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>进阶版</strong></p>
+<p>将原题的1个数出现一次改为2个不同的数出现一次，其他条件保持不变</p>
+<p>首先通过上面的步骤获得2个不同的数的异或结果，由异或的性质得到这两个数至少有一位是不同的，即一个为0，一个为1。</p>
+<p>根据异或的性质，任何一个数字异或他自己都等于0，得到这个数字二进制形式中任意一个为1的位都是我们要找的那个位数。</p>
+<p>再然后，以这一位是 1 还是 0 为标准，将数组的 n 个元素分成两部分。</p>
+<p>将这一位为 0 的所有元素做异或，得出的数就是只出现一次的数中的一个</p>
+<p>将这一位为 1 的所有元素做异或，得出的数就是只出现一次的数中的另一个。</p>
+<p>这样就解出题目。忽略寻找不同位的过程，总共遍历数组两次，时间复杂度为 O(n)。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$arr=<span class="keyword">array</span>(<span class="number">899</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">100</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_bin</span><span class="params">($a,$b)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> $a^$b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'两个不同数的异或结果为：'</span>.array_reduce($arr,<span class="string">'get_bin'</span>,<span class="number">0</span>).<span class="string">"\r\n"</span>;<span class="comment">//得到两个不同数的异或结果为3</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'两个不同数的异或结果的二进制数为：'</span>.decbin(<span class="number">3</span>).PHP_EOL;<span class="comment">//将3转换为二进制为11，即得到这两个不同数的二进制位的第1位和第2位都不同</span></span><br><span class="line"><span class="comment">//我们取第一位不同，那么将原数组中所有二进制第1位为1的分为一组，将第1位为0的分为第二组，再将两个数组进行第一步中的迭代就是我们想要获得的两个不同数</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bin_test</span><span class="params">($num,$wei)</span></span>&#123;<span class="comment">//判断二进制某位是否为1 //这里用到按位与的性质 全1为1 否则为0</span></span><br><span class="line"> $b=<span class="number">1</span>&lt;&lt;($wei<span class="number">-1</span>);<span class="comment">//将数字1位移至目标位数//也可将目标数右移至第一位</span></span><br><span class="line"> <span class="keyword">if</span>(($b &amp; $num) &gt;<span class="number">0</span>)&#123;<span class="comment">//按位与 全1为1 否则为0</span></span><br><span class="line"> 	<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"> &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span> ($arr <span class="keyword">as</span> $value)&#123;</span><br><span class="line"> <span class="keyword">if</span>(bin_test($value,<span class="number">1</span>))&#123;</span><br><span class="line"> 	$arr1[]=$value;</span><br><span class="line"> &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"> 	$arr2[]=$value;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'其中一个数为：'</span>.array_reduce($arr1,<span class="string">'get_bin'</span>,<span class="number">0</span>).PHP_EOL;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'另一个数为：'</span>.array_reduce($arr2,<span class="string">'get_bin'</span>,<span class="number">0</span>).PHP_EOL;</span><br></pre></td></tr></table></figure></p>
 
-        </div>
+    </div>
 
-        <div class="post-permalink"> 
-            <a href="/2018/03/23/Linux-mysql-remote/" class="btn btn-default">阅读全文</a>
+    <div class="post-footer">   
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="#" target="_blank">imcsi</a>
+            
         </div>
-    </footer>
+        <div>
+            
+        </div>  
+    </div>
 </article>
 
+<div class="article-nav prev-next-wrap clearfix">
+    
+    
+        <a href="/2018/11/24/phpalgorithm-erfen/" class="next-post btn btn-default">下一篇<i class="fa fa-angle-right fa-fw"></i></a>
+    
+</div>
 
 
+    <div id="comments">
+        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cytFa2SQc';var conf='0292ab53f953f1d1e4fd48c6ec90f7b7';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
 
-
-
+    </div>
 
 
 
